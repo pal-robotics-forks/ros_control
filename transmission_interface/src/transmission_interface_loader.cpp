@@ -193,7 +193,30 @@ bool TransmissionInterfaceLoader::load(const TransmissionInfo& transmission_info
                            "'. It contains no valid hardware interfaces.");
     return false;
   }
+  return ret;
+}
 
+bool JointStateInterfaceProvider::updateJointInterfaces(const TransmissionInfo& transmission_info,
+                                                        JointInterfaces&        joint_interfaces,
+                                                        RawJointData&           raw_joint_data)
+{
+  // Register joint on all its hardware interfaces
+  BOOST_FOREACH(const JointInfo& joint_info, transmission_info.joints_)
+  {
+    const std::string& name = joint_info.name_;
+
+    // Do nothing if joint already exists on the hardware interface
+    if (hasResource(name, joint_interfaces.joint_state_interface)) {return true;}
+
+    // Update hardware interface
+    using hardware_interface::JointStateHandle;
+    const unsigned int id = addJoint(name, raw_joint_data);
+    JointStateHandle handle(raw_joint_data.names[id],
+                            &raw_joint_data.position[id],
+                            &raw_joint_data.velocity[id],
+                            &raw_joint_data.effort[id]);
+    joint_interfaces.joint_state_interface.registerHandle(handle);
+  }
   return true;
 }
 

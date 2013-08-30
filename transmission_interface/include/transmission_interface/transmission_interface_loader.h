@@ -145,6 +145,12 @@ struct ForwardTransmissionInterfaces
   JointToActuatorEffortInterface   jnt_to_act_eff_cmd;
 };
 
+<<<<<<< HEAD
+=======
+/**
+ * \brief TODO
+ */
+>>>>>>> First draft of transmission loading.
 struct TransmissionLoaderData
 {
   typedef boost::shared_ptr<Transmission> TransmissionPtr;
@@ -242,6 +248,12 @@ protected:
     }
   }
 
+<<<<<<< HEAD
+=======
+  static unsigned int addJoint(const std::string& name, RawJointData& raw_joint_data);
+
+
+>>>>>>> First draft of transmission loading.
   template <class HardwareInterface, class Handle>
   bool getActuatorHandles(const std::vector<ActuatorInfo>& actuators_info,
                           hardware_interface::RobotHW*     robot_hw,

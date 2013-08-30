@@ -61,6 +61,23 @@ add_library(${PROJECT_NAME}_loader_plugins
   src/effort_joint_interface_provider.cpp      include/transmission_interface/effort_joint_interface_provider.h)
 target_link_libraries(${PROJECT_NAME}_loader_plugins ${PROJECT_NAME}_loader)
 
+<<<<<<< HEAD
+=======
+  # Transmission parser Library
+  add_library(${PROJECT_NAME}_parser
+    src/transmission_parser.cpp include/transmission_interface/transmission_parser.h
+  )
+  target_link_libraries(${PROJECT_NAME}_parser ${catkin_LIBRARIES} ${TinyXML_LIBRARIES})
+>>>>>>> First draft of transmission loading.
+
+  # Transmission loader library
+  add_library(transmission_interface_loader
+    src/transmission_loader.cpp           include/transmission_interface/transmission_loader.h
+    src/simple_transmission_loader.cpp    include/transmission_interface/simple_transmission_loader.h
+    src/transmission_interface_loader.cpp include/transmission_interface/transmission_interface_loader.h
+  )
+  target_link_libraries(transmission_interface_loader ${catkin_LIBRARIES} ${TinyXML_LIBRARIES})
+
 
 #############
 ## Install ##
