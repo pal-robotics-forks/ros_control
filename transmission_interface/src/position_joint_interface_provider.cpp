@@ -60,7 +60,11 @@ bool PositionJointInterfaceProvider::updateJointInterfaces(const TransmissionInf
     const std::string& name = joint_info.name_;
 
     // Do nothing if joint already exists on the hardware interface
+<<<<<<< HEAD
     if (hasResource(name, interface)) {continue;}
+=======
+    if (hasResource(name, interface)) {return true;}
+>>>>>>> Fix bug when adding multiple transmissions.
 
     // Update hardware interface
     using hardware_interface::JointHandle;
