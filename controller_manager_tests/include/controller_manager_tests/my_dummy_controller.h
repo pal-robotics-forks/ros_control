@@ -51,6 +51,7 @@ class MyDummyController : public controller_interface::Controller<MyDummyInterfa
 public:
   MyDummyController() { }
 
+  using controller_interface::Controller<MyDummyInterface>::init;
   bool init(MyDummyInterface* hw, ros::NodeHandle &n) { return true; }
   void starting(const ros::Time& time) { }
   void update(const ros::Time& time, const ros::Duration& period) { }

@@ -66,9 +66,9 @@ class PositionJointSaturationHandle
 {
 public:
   PositionJointSaturationHandle(const hardware_interface::JointHandle& jh, const JointLimits& limits)
+  : jh_(jh),
+    limits_(limits)
   {
-    jh_ = jh;
-    limits_ = limits;
 
     if (limits_.has_position_limits)
     {
@@ -253,9 +253,10 @@ class EffortJointSaturationHandle
 {
 public:
   EffortJointSaturationHandle(const hardware_interface::JointHandle& jh, const JointLimits& limits)
+  :    jh_(jh),
+    limits_(limits)
   {
-    jh_ = jh;
-    limits_ = limits;
+
   }
 
   /** \return Joint name. */
@@ -463,11 +464,11 @@ class VelocityJointSoftLimitsHandle
 {
 public:
   VelocityJointSoftLimitsHandle(const hardware_interface::JointHandle& jh, const JointLimits& limits,
-                                const SoftJointLimits& soft_limits)
-  {
-    jh_ = jh;
-    limits_ = limits;
-    soft_limits_ = soft_limits;
+                                const SoftJointLimits& soft_limits):
+    jh_(jh),
+    limits_(limits),
+    soft_limits_(soft_limits)
+  {    
     if (limits.has_velocity_limits)
       max_vel_limit_ = limits.max_velocity;
     else
