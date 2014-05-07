@@ -2,7 +2,15 @@
 Changelog for package joint_limits_interface
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-0.5.6 (2013-07-29)
+0.7.2 (2014-04-01)
+------------------
+
+0.7.1 (2014-03-31)
+------------------
+* Fix dependency specification in CMake script to allow isolated builds.
+* Contributors: Adolfo Rodriguez Tsouroukdissian
+
+0.7.0 (2014-03-28)
 ------------------
 
 0.6.0 (2014-02-05)
@@ -40,6 +48,9 @@ Changelog for package joint_limits_interface
 * Add angle_wraparound joint limit property.
   For full compatibility with MoveIt!'s joint limit specification.
   Note that we still have the extra effort and jerk specification.
+
+0.5.6 (2013-07-29)
+------------------
 
 0.5.5 (2013-07-23)
 ------------------
