@@ -13,6 +13,8 @@ else()
   # Load catkin and all dependencies required for this package
   find_package(catkin REQUIRED COMPONENTS message_generation std_msgs)
 
+  catkin_python_setup()
+
   # Add message and service files
   add_message_files(
     FILES 
