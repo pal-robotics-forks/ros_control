@@ -41,6 +41,7 @@ else() # catkin
     CATKIN_DEPENDS 
       roscpp
       hardware_interface
+    DEPENDS
       urdfdom
     INCLUDE_DIRS
       include
