@@ -40,11 +40,10 @@ else() # catkin
   catkin_package(
     CATKIN_DEPENDS 
       roscpp
+      hardware_interface
+      urdfdom
     INCLUDE_DIRS
       include
-      ${catkin_INCLUDE_DIRS}
-    LIBRARIES
-      ${catkin_LIBRARIES}
   )
 
   if(CATKIN_ENABLE_TESTING)
