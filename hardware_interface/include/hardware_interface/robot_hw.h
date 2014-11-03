@@ -35,6 +35,7 @@
 #include <hardware_interface/internal/interface_manager.h>
 #include <hardware_interface/hardware_interface.h>
 #include <hardware_interface/controller_info.h>
+#include <hardware_interface/joint_mode_interface.h>
 #include <ros/console.h>
 
 namespace hardware_interface
@@ -57,9 +58,7 @@ class RobotHW : public InterfaceManager
 {
 public:
   RobotHW()
-  {
-
-  }
+  {}
 
   /** \name Resource Management
    *\{*/
@@ -75,10 +74,20 @@ public:
     // Figure out which resources have multiple users
     typedef std::map<std::string, std::list<ControllerInfo> > ResourceMap;
     ResourceMap resource_map;
+    typedef std::map<std::string, std::list<ControllerInfo> > ModeResourceMap;
+    ModeResourceMap mode_resource_map;
+
     for (std::list<ControllerInfo>::const_iterator info_it = info.begin(); info_it != info.end(); ++info_it)
       for (std::set<std::string>::const_iterator resource_it = info_it->resources.begin(); resource_it != info_it->resources.end(); ++resource_it)
-        resource_map[*resource_it].push_back(*info_it);
+      {
+        if(info_it->hardware_interface !=
+           internal::demangledTypeName<hardware_interface::JointModeInterface>())
+          resource_map[*resource_it].push_back(*info_it);
+        else
+          mode_resource_map[*resource_it].push_back(*info_it);
+      }
 
+    // check for all interfaces but mode
     bool in_conflict = false;
     for (ResourceMap::iterator it = resource_map.begin(); it != resource_map.end(); ++it)
     {
@@ -88,6 +97,19 @@ public:
         for (std::list<ControllerInfo>::const_iterator controller_it = it->second.begin(); controller_it != it->second.end(); ++controller_it)
           controller_list += controller_it->name + ", ";
         ROS_WARN("Resource conflict on [%s].  Controllers = [%s]", it->first.c_str(), controller_list.c_str());
+        in_conflict = true;
+      }
+    }
+
+    // check for mode interfaces
+    for (ModeResourceMap::iterator it = mode_resource_map.begin(); it != mode_resource_map.end(); ++it)
+    {
+      if (it->second.size() > 1)
+      {
+        std::string controller_list;
+        for (std::list<ControllerInfo>::const_iterator controller_it = it->second.begin(); controller_it != it->second.end(); ++controller_it)
+          controller_list += controller_it->name + ", ";
+        ROS_WARN("Resource conflict on [%s].  Mode switching controllers = [%s]", it->first.c_str(), controller_list.c_str());
         in_conflict = true;
       }
     }
