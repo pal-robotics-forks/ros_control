@@ -2,6 +2,7 @@
  * Software License Agreement (BSD License)
  *
  *  Copyright (c) 2013, University of Colorado, Boulder
+ *  Copyright (c) 2014, PAL Robotics SL.
  *  All rights reserved.
  *
  *  Redistribution and use in source and binary forms, with or without
@@ -32,7 +33,7 @@
  *  POSSIBILITY OF SUCH DAMAGE.
  *********************************************************************/
 
-/* Author: Dave Coleman
+/* Author: Bence Magyar, Dave Coleman
    Desc:   This interface is for switching a hardware interface between different controller modes
            i.e. position, velocity, force
 */
@@ -46,62 +47,73 @@
 namespace hardware_interface
 {
 
-enum JointCommandModes {
-  MODE_POSITION = 1,
-  MODE_VELOCITY = 2,
-  MODE_EFFORT = 3,
-  MODE_OTHER = 4
-};
-
-/** \brief A handle used to read and mode a single joint. */
+/** \brief A handle used to read and write the mode of a single joint. */
 class JointModeHandle
 {
 public:
 
-  /**
-   * \param mode Which mode to start in
-   */
-  JointModeHandle(std::string name, JointCommandModes* mode)
+  JointModeHandle(const std::string& name, std::string* mode,
+                  const std::string& start_mode,
+                  const std::set<std::string>& allowed_modes = std::set<std::string>())
     : mode_(mode)
     , name_(name)
+    , allowed_modes_(allowed_modes)
   {
     if (!mode_)
     {
-      throw HardwareInterfaceException("Cannot create mode interface. Mode data pointer is null.");
+      throw HardwareInterfaceException("Cannot create handle '" + name + "'. Mode data pointer is null.");
     }
+    *mode = start_mode;
   }
 
-  std::string getName() const {return name_;}
+  const std::string& getName() const {return name_;}
 
-  void setMode(JointCommandModes mode) {assert(mode_); *mode_ = mode;}
-  int getMode() const {assert(mode_); return *mode_;}
-
-  // Helper function for console messages
-  std::string getModeName(JointCommandModes mode)
+  /**
+   * \brief Sets the mode of the joint. If there are 0 allowed modes registered
+   * any mode change will pass. If there are modes registered, only the registered
+   * ones will pass.
+   */
+  void setMode(const std::string& mode)
   {
-    switch(mode)
+    assert(mode_);
+
+    if(allowed_modes_.size() == 0)
     {
-      case MODE_POSITION:
-        return "position";
-      case MODE_VELOCITY:
-        return "velocity";
-      case MODE_EFFORT:
-        return "effort";
-      case MODE_OTHER:
-        return "other";
+      *mode_ = mode;
     }
-    return "unknown";
+    else
+    {
+      if(allowed_modes_.count(mode) > 0)
+      {
+        *mode_ = mode;
+      }
+      else
+      {
+        ROS_ERROR_STREAM("Cannot set mode to " << mode
+                         << ". It is not registered on this handle.");
+      }
+    }
   }
+
+  const std::string& getMode() const
+  {
+    assert(mode_);
+    return *mode_;
+  }
+
+  const std::set<std::string>& getAvailableModes() const
+  { return allowed_modes_; }
 
 private:
-  JointCommandModes* mode_;
+  std::string* mode_;
   std::string name_;
+  std::set<std::string> allowed_modes_;
 };
 
-/** \brief Hardware interface to support changing between control modes
- *
+/**
+ *\brief Hardware interface to support changing between control modes
  */
-class JointModeInterface : public HardwareResourceManager<JointModeHandle, ClaimResources> {};
+class JointModeInterface : public HardwareResourceManager<JointModeHandle, ClaimResources>{};
 
 } // namespace
 
