@@ -122,6 +122,8 @@ bool TransmissionInterfaceLoader::load(const std::string& urdf)
   {
     if (!load(info)) {return false;}
   }
+  
+  loader_data_.transmission_infos = infos;
   return true;
 }
 

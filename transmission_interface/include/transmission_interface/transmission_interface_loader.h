@@ -163,6 +163,7 @@ struct TransmissionLoaderData
   RawJointDataMap               raw_joint_data_map;
   ForwardTransmissionInterfaces transmission_interfaces;
   std::vector<TransmissionPtr>  transmission_data;
+  std::vector<TransmissionInfo> transmission_infos;
 };
 
 class RequisiteProvider // TODO: There must be a more descriptive name for this class!
