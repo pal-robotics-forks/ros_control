@@ -33,36 +33,46 @@
  *  POSSIBILITY OF SUCH DAMAGE.
  *********************************************************************/
 
-/* Author: Bence Magyar, Dave Coleman
-   Desc:   This interface is for switching a hardware interface between different controller modes
-           i.e. position, velocity, force
-*/
-
 #ifndef HARDWARE_INTERFACE_JOINT_MODE_INTERFACE_H
 #define HARDWARE_INTERFACE_JOINT_MODE_INTERFACE_H
 
 #include <cassert>
 #include <hardware_interface/internal/hardware_resource_manager.h>
 
+namespace
+{
+  // typedef local to this file
+  typedef std::set<std::string> StringSet;
+}
+
 namespace hardware_interface
 {
 
-/** \brief A handle used to read and write the mode of a single joint. */
+/**
+ * \brief A handle used to read and write the mode of a single joint.
+ * \author: Bence Magyar, Dave Coleman
+ */
 class JointModeHandle
 {
 public:
 
+  /**
+   * \param name Name of the joint
+   * \param mode Pointer to the current joint mode
+   * \param start_mode The joint mode to start in (if there is any)
+   * \param allowed_modes A set of hardware interfaces names. If not given, setMode() will allow any joint mode to be set. If given, setMode() will refuse and return false when setting to a joint mode that is not in this set.
+   */
   JointModeHandle(const std::string& name, std::string* mode,
-                  const std::string& start_mode,
-                  const std::set<std::string>& allowed_modes = std::set<std::string>())
+                  const std::string& start_mode = "",
+                  const StringSet& allowed_modes = StringSet())
     : mode_(mode)
     , name_(name)
-    , allowed_modes_(allowed_modes)
   {
     if (!mode_)
     {
       throw HardwareInterfaceException("Cannot create handle '" + name + "'. Mode data pointer is null.");
     }
+    allowed_modes_.reset(new StringSet(allowed_modes));
     *mode = start_mode;
   }
 
@@ -73,25 +83,16 @@ public:
    * any mode change will pass. If there are modes registered, only the registered
    * ones will pass.
    */
-  void setMode(const std::string& mode)
+  bool setMode(const std::string& mode)
   {
-    assert(mode_);
-
-    if(allowed_modes_.size() == 0)
+    if(allowed_modes_->empty() || allowed_modes_->count(mode) > 0)
     {
       *mode_ = mode;
+      return true;
     }
     else
     {
-      if(allowed_modes_.count(mode) > 0)
-      {
-        *mode_ = mode;
-      }
-      else
-      {
-        ROS_ERROR_STREAM("Cannot set mode to " << mode
-                         << ". It is not registered on this handle.");
-      }
+      return false;
     }
   }
 
@@ -101,13 +102,13 @@ public:
     return *mode_;
   }
 
-  const std::set<std::string>& getAvailableModes() const
+  boost::shared_ptr<StringSet> getAvailableModes() const 
   { return allowed_modes_; }
 
 private:
   std::string* mode_;
   std::string name_;
-  std::set<std::string> allowed_modes_;
+  boost::shared_ptr<StringSet> allowed_modes_;
 };
 
 /**
