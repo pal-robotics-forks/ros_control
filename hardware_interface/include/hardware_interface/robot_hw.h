@@ -87,7 +87,7 @@ public:
           mode_resource_map[*resource_it].push_back(*info_it);
       }
 
-    // check for all interfaces but mode
+    // check for all interfaces but joint mode
     bool in_conflict = false;
     for (ResourceMap::iterator it = resource_map.begin(); it != resource_map.end(); ++it)
     {
@@ -101,7 +101,7 @@ public:
       }
     }
 
-    // check for mode interfaces
+    // check for joint mode interfaces
     for (ModeResourceMap::iterator it = mode_resource_map.begin(); it != mode_resource_map.end(); ++it)
     {
       if (it->second.size() > 1)
