@@ -292,6 +292,8 @@ public:
 
   bool load(const std::string& urdf);
 
+  bool load(const std::vector<TransmissionInfo>& transmission_info_vec);
+
   bool load(const TransmissionInfo& transmission_info);
 
   TransmissionLoaderData* getData() {return &loader_data_;}
