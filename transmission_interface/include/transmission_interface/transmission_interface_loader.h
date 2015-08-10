@@ -145,12 +145,6 @@ struct ForwardTransmissionInterfaces
   JointToActuatorEffortInterface   jnt_to_act_eff_cmd;
 };
 
-<<<<<<< HEAD
-=======
-/**
- * \brief TODO
- */
->>>>>>> First draft of transmission loading.
 struct TransmissionLoaderData
 {
   typedef boost::shared_ptr<Transmission> TransmissionPtr;
