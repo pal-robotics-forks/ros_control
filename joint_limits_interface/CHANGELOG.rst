@@ -2,6 +2,12 @@
 Changelog for package joint_limits_interface
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* reset functionality for stateful postion handles
+* Add inline keyword to free header functions
+* Contributors: Adolfo Rodriguez Tsouroukdissian, Mathias Lüdtke
+
 0.1.1 (2014-10-29)
 ------------------
 
