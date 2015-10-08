@@ -2,8 +2,8 @@
 Changelog for package hardware_interface
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.1.2 (2015-10-08)
+------------------
 * Address -Wunused-parameter warnings
 * Contributors: Adolfo Rodriguez Tsouroukdissian
 
