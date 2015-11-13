@@ -2,6 +2,9 @@
 Changelog for package controller_manager_tests
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+
 0.1.2 (2015-10-08)
 ------------------
 * Address -Wunused-parameter warnings

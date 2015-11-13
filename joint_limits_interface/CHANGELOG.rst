@@ -2,6 +2,11 @@
 Changelog for package joint_limits_interface
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Fix various catkin lint warnings
+* Contributors: Victor Lopez
+
 0.1.2 (2015-10-08)
 ------------------
 * reset functionality for stateful postion handles

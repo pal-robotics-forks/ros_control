@@ -2,6 +2,11 @@
 Changelog for package controller_manager
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Fix various catkin lint warnings
+* Contributors: Victor Lopez
+
 0.1.2 (2015-10-08)
 ------------------
 
