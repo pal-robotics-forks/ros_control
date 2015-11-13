@@ -54,6 +54,7 @@ else()
 
   # Load catkin and all dependencies required for this package
   find_package(catkin REQUIRED
+      COMPONENTS
     hardware_interface
     cmake_modules
     pluginlib
@@ -74,6 +75,7 @@ else()
       include
     DEPENDS
       TinyXML
+  CATKIN_DEPENDS
       pluginlib
       resource_retriever
       roscpp

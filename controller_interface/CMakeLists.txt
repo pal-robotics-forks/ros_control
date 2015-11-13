@@ -14,7 +14,6 @@ else()
 
   # Declare catkin package
   catkin_package(
-    DEPENDS boost
     CATKIN_DEPENDS roscpp hardware_interface pluginlib
     INCLUDE_DIRS include
     )
