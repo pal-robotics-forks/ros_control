@@ -24,10 +24,11 @@ if(USE_ROSBUILD)
 else() # catkin
 
   find_package(catkin REQUIRED
-    roscpp
-    rostest
-    hardware_interface
-    urdfdom
+      COMPONENTS
+        roscpp
+        rostest
+        hardware_interface
+        urdfdom
   )
 
   include_directories(
