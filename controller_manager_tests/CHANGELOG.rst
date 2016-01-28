@@ -2,6 +2,9 @@
 Changelog for package controller_manager_tests
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+
 0.2.0 (2016-01-28)
 ------------------
 * controller_manager: Cleaner test exit

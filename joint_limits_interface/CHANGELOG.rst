@@ -2,6 +2,11 @@
 Changelog for package joint_limits_interface
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Fix catkin_package
+* Contributors: Victor Lopez
+
 0.2.0 (2016-01-28)
 ------------------
 * fix urdfdom dependency
