@@ -2,6 +2,13 @@
 Changelog for package hardware_interface
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* controller_manager: Fix doSwitch execution point
+* Address further -Wunused-parameter warnings
+* added HW interface switch feature with unit tests
+* Contributors: Adolfo Rodriguez Tsouroukdissian, Mathias Lüdtke
+
 0.1.2 (2015-10-08)
 ------------------
 * Address -Wunused-parameter warnings
