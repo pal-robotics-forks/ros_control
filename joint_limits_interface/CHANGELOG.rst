@@ -2,8 +2,8 @@
 Changelog for package joint_limits_interface
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.2.1 (2016-01-28)
+------------------
 * Fix catkin_package
 * Contributors: Victor Lopez
 
