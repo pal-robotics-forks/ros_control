@@ -2,8 +2,8 @@
 Changelog for package transmission_interface
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.2.0 (2016-01-28)
+------------------
 * Fix various catkin lint warnings
 * Allow loading from TransmissionInfo list
 * Contributors: Adolfo Rodriguez Tsouroukdissian, Victor Lopez
