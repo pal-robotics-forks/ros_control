@@ -23,11 +23,8 @@ project(joint_limits_interface)
       hardware_interface
     INCLUDE_DIRS
       include
-    ${catkin_INCLUDE_DIRS}
-    ${urdfdom_INCLUDE_DIRS}
-  LIBRARIES
-    ${catkin_LIBRARIES}
-    ${urdfdom_LIBRARIES}
+    DEPENDS
+        urdfdom
   )
 
   if(CATKIN_ENABLE_TESTING)
