@@ -2,6 +2,11 @@
 Changelog for package joint_limits_interface
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* fix urdfdom dependency
+* Contributors: Jordi Pages
+
 0.1.2 (2015-10-08)
 ------------------
 * reset functionality for stateful postion handles
