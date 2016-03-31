@@ -2,6 +2,9 @@
 Changelog for package hardware_interface
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+
 0.2.1 (2016-01-28)
 ------------------
 
