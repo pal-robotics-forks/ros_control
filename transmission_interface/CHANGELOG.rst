@@ -2,8 +2,8 @@
 Changelog for package transmission_interface
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.2.2 (2016-03-31)
+------------------
 * Changed private members of transmission parser from private to protected in order to implement transmission parser with blacklist
 * Contributors: Hilario Tome
 
