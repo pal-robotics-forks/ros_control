@@ -50,6 +50,8 @@ struct ActuatorData
   std::vector<double*> position;
   std::vector<double*> velocity;
   std::vector<double*> effort;
+  std::vector<double*> absolute_position;
+  std::vector<double*> torque_sensor;
 };
 
 /**
@@ -61,6 +63,8 @@ struct JointData
   std::vector<double*> position;
   std::vector<double*> velocity;
   std::vector<double*> effort;
+  std::vector<double*> absolute_position;
+  std::vector<double*> torque_sensor;
 };
 
 /**
@@ -118,6 +122,12 @@ public:
    * Data vectors not used in this map can remain empty.
    */
   virtual void actuatorToJointPosition(const ActuatorData& act_data,
+                                             JointData&    jnt_data) = 0;
+
+  virtual void actuatorToJointAbsolutePosition(const ActuatorData& act_data,
+                                             JointData&    jnt_data) = 0;
+
+  virtual void actuatorToJointTorqueSensor(const ActuatorData& act_data,
                                              JointData&    jnt_data) = 0;
 
   /**

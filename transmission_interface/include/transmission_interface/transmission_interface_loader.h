@@ -122,6 +122,10 @@ struct RawJointData
   double position_cmd;
   double velocity_cmd;
   double effort_cmd;
+
+  double absolute_position;
+  double torque_sensor;
+
 };
 
 typedef std::map<std::string, RawJointData> RawJointDataMap;

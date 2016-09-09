@@ -62,7 +62,9 @@ bool JointStateInterfaceProvider::updateJointInterfaces(const TransmissionInfo& 
     JointStateHandle handle(name,
                             &raw_joint_data.position,
                             &raw_joint_data.velocity,
-                            &raw_joint_data.effort);
+                            &raw_joint_data.effort,
+                            &raw_joint_data.absolute_position,
+                            &raw_joint_data.torque_sensor);
     interface.registerHandle(handle);
   }
   return true;
@@ -76,6 +78,8 @@ bool JointStateInterfaceProvider::getJointStateData(const TransmissionInfo& tran
   jnt_state_data.position.resize(dim);
   jnt_state_data.velocity.resize(dim);
   jnt_state_data.effort.resize(dim);
+  jnt_state_data.absolute_position.resize(dim);
+  jnt_state_data.torque_sensor.resize(dim);
 
   for (unsigned int i = 0; i < dim; ++i)
   {
@@ -88,6 +92,9 @@ bool JointStateInterfaceProvider::getJointStateData(const TransmissionInfo& tran
     jnt_state_data.position[i] = const_cast<double*>(&(raw_joint_data.position));
     jnt_state_data.velocity[i] = const_cast<double*>(&(raw_joint_data.velocity));
     jnt_state_data.effort[i]   = const_cast<double*>(&(raw_joint_data.effort));
+    jnt_state_data.absolute_position[i]   = const_cast<double*>(&(raw_joint_data.absolute_position));
+    jnt_state_data.torque_sensor[i]   = const_cast<double*>(&(raw_joint_data.torque_sensor));
+
   }
 
   return true;
@@ -111,6 +118,8 @@ bool JointStateInterfaceProvider::getActuatorStateData(const TransmissionInfo&  
   act_state_data.position.resize(dim);
   act_state_data.velocity.resize(dim);
   act_state_data.effort.resize(dim);
+  act_state_data.absolute_position.resize(dim);
+  act_state_data.torque_sensor.resize(dim);
 
   for (unsigned int i = 0; i < dim; ++i)
   {
@@ -118,6 +127,8 @@ bool JointStateInterfaceProvider::getActuatorStateData(const TransmissionInfo&  
     act_state_data.position[i] = const_cast<double*>(handles[i].getPositionPtr());
     act_state_data.velocity[i] = const_cast<double*>(handles[i].getVelocityPtr());
     act_state_data.effort[i]   = const_cast<double*>(handles[i].getEffortPtr());
+    act_state_data.absolute_position[i] = const_cast<double*>(handles[i].getAbsolutePositionPtr());
+    act_state_data.torque_sensor[i]   = const_cast<double*>(handles[i].getTorqueSensorPtr());
   }
   return true;
 }
