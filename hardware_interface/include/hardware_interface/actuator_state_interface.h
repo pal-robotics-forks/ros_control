@@ -70,7 +70,7 @@ public:
 
   ActuatorStateHandle(const std::string& name, const double* pos, const double* vel, const double* eff,
                       const double* absolute_pos, const double *torque_sensor)
-    : name_(name), pos_(pos), vel_(vel), eff_(eff)
+    : name_(name), pos_(pos), vel_(vel), eff_(eff), absolute_pos_(absolute_pos), torque_sensor_(torque_sensor)
   {
     if (!pos)
     {

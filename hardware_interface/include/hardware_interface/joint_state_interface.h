@@ -100,8 +100,37 @@ public:
   double getVelocity()  const {assert(vel_); return *vel_;}
   double getEffort()    const {assert(eff_); return *eff_;}
 
-  double getAbsolutePosition() const { assert(absolute_pos_); return *absolute_pos_;}
-  double getTorqueSensor() const { assert(torque_sensor_); return *torque_sensor_;}
+  double getAbsolutePosition() const {
+    assert(absolute_pos_);
+    if(!hasAbsolutePosition()){
+      throw std::runtime_error("Joint state handle does not contain absolute encoder position information");
+    }
+    return *absolute_pos_;
+  }
+  double getTorqueSensor() const {
+    assert(torque_sensor_);
+    if(!hasTorqueSensor()){
+      throw std::runtime_error("Joint state handle does not contain torque sensor information");
+    }
+    return *torque_sensor_;
+  }
+
+  const bool hasAbsolutePosition() const {
+    if(absolute_pos_){
+      return true;
+    }
+    return false;
+  }
+
+  const bool hasTorqueSensor() const
+  {
+    if(torque_sensor_){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
 
 private:
   std::string name_;

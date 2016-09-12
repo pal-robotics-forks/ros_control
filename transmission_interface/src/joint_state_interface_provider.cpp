@@ -65,6 +65,7 @@ bool JointStateInterfaceProvider::updateJointInterfaces(const TransmissionInfo& 
                             &raw_joint_data.effort,
                             &raw_joint_data.absolute_position,
                             &raw_joint_data.torque_sensor);
+
     interface.registerHandle(handle);
   }
   return true;
@@ -94,6 +95,8 @@ bool JointStateInterfaceProvider::getJointStateData(const TransmissionInfo& tran
     jnt_state_data.effort[i]   = const_cast<double*>(&(raw_joint_data.effort));
     jnt_state_data.absolute_position[i]   = const_cast<double*>(&(raw_joint_data.absolute_position));
     jnt_state_data.torque_sensor[i]   = const_cast<double*>(&(raw_joint_data.torque_sensor));
+
+    std::cerr<<"JOINT STATE INTERFACE PROVIDER: "<<const_cast<double*>(&(raw_joint_data.absolute_position)) <<std::endl;
 
   }
 
