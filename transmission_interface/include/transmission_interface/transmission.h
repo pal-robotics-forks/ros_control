@@ -33,6 +33,7 @@
 #include <cstddef>
 #include <string>
 #include <vector>
+#include <stdexcept>
 
 namespace transmission_interface
 {
@@ -125,10 +126,14 @@ public:
                                              JointData&    jnt_data) = 0;
 
   virtual void actuatorToJointAbsolutePosition(const ActuatorData& act_data,
-                                             JointData&    jnt_data) = 0;
+                                             JointData&){
+    throw std::runtime_error("transmission does not support actuator to joint absolute position");
+  }
 
   virtual void actuatorToJointTorqueSensor(const ActuatorData& act_data,
-                                             JointData&    jnt_data) = 0;
+                                             JointData&){
+    throw std::runtime_error("transmission does not support actuator to joint torque sensor");
+  }
 
   /**
    * \brief Transform \e effort variables from joint to actuator space.

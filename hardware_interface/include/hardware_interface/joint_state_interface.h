@@ -77,8 +77,56 @@ public:
     }
   }
 
+  JointStateHandle(const std::string& name, const double* pos, const double* vel, const double* eff,
+                   const double* absolute_pos)
+    : name_(name), pos_(pos), vel_(vel), eff_(eff), absolute_pos_(absolute_pos), torque_sensor_(0)
+  {
+
+    if (!pos)
+    {
+      throw HardwareInterfaceException("Cannot create handle '" + name + "'. Position data pointer is null.");
+    }
+    if (!vel)
+    {
+      throw HardwareInterfaceException("Cannot create handle '" + name + "'. Velocity data pointer is null.");
+    }
+    if (!eff)
+    {
+      throw HardwareInterfaceException("Cannot create handle '" + name + "'. Effort data pointer is null.");
+    }
+    if (!absolute_pos)
+    {
+      throw HardwareInterfaceException("Cannot create handle '" + name + "'. Absolute data pointer is null.");
+    }
+  }
+
+
+  JointStateHandle(const std::string& name, const double* pos, const double* vel, const double* eff,
+                   const double *torque_sensor, bool )
+    : name_(name), pos_(pos), vel_(vel), eff_(eff), absolute_pos_(0), torque_sensor_(torque_sensor)
+  {
+
+    if (!pos)
+    {
+      throw HardwareInterfaceException("Cannot create handle '" + name + "'. Position data pointer is null.");
+    }
+    if (!vel)
+    {
+      throw HardwareInterfaceException("Cannot create handle '" + name + "'. Velocity data pointer is null.");
+    }
+    if (!eff)
+    {
+      throw HardwareInterfaceException("Cannot create handle '" + name + "'. Effort data pointer is null.");
+    }
+    if (!torque_sensor)
+    {
+      throw HardwareInterfaceException("Cannot create handle '" + name + "'. Torque sensor data pointer is null.");
+    }
+  }
+
+
   JointStateHandle(const std::string& name, const double* pos, const double* vel, const double* eff)
-    : name_(name), pos_(pos), vel_(vel), eff_(eff)
+    : name_(name), pos_(pos), vel_(vel), eff_(eff), absolute_pos_(0), torque_sensor_(0)
   {
     if (!pos)
     {
