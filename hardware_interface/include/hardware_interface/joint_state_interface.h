@@ -163,14 +163,14 @@ public:
     return *torque_sensor_;
   }
 
-  const bool hasAbsolutePosition() const {
+  bool hasAbsolutePosition() const {
     if(absolute_pos_){
       return true;
     }
     return false;
   }
 
-  const bool hasTorqueSensor() const
+  bool hasTorqueSensor() const
   {
     if(torque_sensor_){
       return true;
