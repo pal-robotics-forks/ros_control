@@ -66,7 +66,6 @@ public:
       throw HardwareInterfaceException("Cannot create handle '" + name + "'. Effort data pointer is null.");
     }
 
-    ROS_ERROR_STREAM("Actuator state handle");
   }
 
   ActuatorStateHandle(const std::string& name, const double* pos, const double* vel, const double* eff,
