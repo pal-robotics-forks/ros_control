@@ -2,8 +2,8 @@
 Changelog for package hardware_interface
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.2.3 (2016-10-11)
+------------------
 * Removed print statement and const from hast torque sensor
 * Added backcompatibility
 * Absolute position and torque sensor working
