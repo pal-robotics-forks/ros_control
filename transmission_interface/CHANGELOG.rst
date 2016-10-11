@@ -2,8 +2,8 @@
 Changelog for package transmission_interface
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.2.3 (2016-10-11)
+------------------
 * Added has torque sensor and absolute encoder support to transmissions
 * Added backcompatibility
 * Absolute position and torque sensor working
