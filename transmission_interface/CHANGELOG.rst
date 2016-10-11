@@ -2,6 +2,14 @@
 Changelog for package transmission_interface
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Added has torque sensor and absolute encoder support to transmissions
+* Added backcompatibility
+* Absolute position and torque sensor working
+* Modified structures to have absolute encoder and torque sensor parameters
+* Contributors: Hilario Tome
+
 0.2.2 (2016-03-31)
 ------------------
 * Changed private members of transmission parser from private to protected in order to implement transmission parser with blacklist
