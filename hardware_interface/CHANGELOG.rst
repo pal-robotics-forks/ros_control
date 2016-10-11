@@ -2,6 +2,14 @@
 Changelog for package hardware_interface
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Removed print statement and const from hast torque sensor
+* Added backcompatibility
+* Absolute position and torque sensor working
+* Modified structures to have absolute encoder and torque sensor parameters
+* Contributors: Hilario Tome
+
 0.2.2 (2016-03-31)
 ------------------
 
