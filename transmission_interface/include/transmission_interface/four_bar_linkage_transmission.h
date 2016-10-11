@@ -163,6 +163,13 @@ public:
   void actuatorToJointTorqueSensor(const ActuatorData& act_data,
                                              JointData&    jnt_data);
 
+  bool hasActuatorToJointAbsolutePosition(){
+    return true;
+  }
+
+  bool hasActuatorToJointTorqueSensor(){
+    return true;
+  }
   /**
    * \brief Transform \e effort variables from joint to actuator space.
    * \param[in]  jnt_data Joint-space variables.
