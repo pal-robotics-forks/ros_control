@@ -59,7 +59,7 @@ bool JointStateInterfaceProvider::updateJointInterfaces(const TransmissionInfo& 
     // Update hardware interface
     using hardware_interface::JointStateHandle;
     RawJointData& raw_joint_data = raw_joint_data_map[name]; // Add joint if it does not yet exist
-    if(raw_joint_data.absolute_position && raw_joint_data.torque_sensor){
+    if(raw_joint_data.hasAbsolutePosition && raw_joint_data.hasTorqueSensor){
       JointStateHandle handle(name,
                               &raw_joint_data.position,
                               &raw_joint_data.velocity,
@@ -68,7 +68,7 @@ bool JointStateInterfaceProvider::updateJointInterfaces(const TransmissionInfo& 
                               &raw_joint_data.torque_sensor);
       interface.registerHandle(handle);
     }
-    else if(raw_joint_data.absolute_position){
+    else if(raw_joint_data.hasAbsolutePosition){
       JointStateHandle handle(name,
                               &raw_joint_data.position,
                               &raw_joint_data.velocity,
@@ -76,7 +76,7 @@ bool JointStateInterfaceProvider::updateJointInterfaces(const TransmissionInfo& 
                               &raw_joint_data.absolute_position);
       interface.registerHandle(handle);
     }
-    else if(raw_joint_data.torque_sensor){
+    else if(raw_joint_data.hasTorqueSensor){
       JointStateHandle handle(name,
                               &raw_joint_data.position,
                               &raw_joint_data.velocity,
