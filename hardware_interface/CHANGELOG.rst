@@ -2,6 +2,11 @@
 Changelog for package hardware_interface
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Added joint mode interface
+* Contributors: Hilario Tome
+
 0.2.3 (2016-10-11)
 ------------------
 * Removed print statement and const from hast torque sensor

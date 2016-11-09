@@ -2,6 +2,11 @@
 Changelog for package transmission_interface
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Fixed bug hasTorqueSensor and hasAbsoluteSensor, added std run_time exception support to controller manager
+* Contributors: Hilario Tome
+
 0.2.3 (2016-10-11)
 ------------------
 * Added has torque sensor and absolute encoder support to transmissions

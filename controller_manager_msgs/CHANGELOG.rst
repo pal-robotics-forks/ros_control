@@ -2,6 +2,11 @@
 Changelog for package controller_manager_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Fixed cmake
+* Contributors: Hilario Tome
+
 0.2.3 (2016-10-11)
 ------------------
 
