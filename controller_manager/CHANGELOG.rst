@@ -2,8 +2,8 @@
 Changelog for package controller_manager
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.2.4 (2016-11-09)
+------------------
 * Fixed bug hasTorqueSensor and hasAbsoluteSensor, added std run_time exception support to controller manager
 * Contributors: Hilario Tome
 
