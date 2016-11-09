@@ -46,62 +46,74 @@
 namespace hardware_interface
 {
 
-enum JointCommandModes {
-  MODE_POSITION = 1,
-  MODE_VELOCITY = 2,
-  MODE_EFFORT = 3,
-  MODE_OTHER = 4
-};
+  enum JointCommandModes {
+    BEGIN = -1,
+    MODE_POSITION = 0,
+    MODE_VELOCITY = 1,
+    MODE_EFFORT = 2,
+    NOMODE = 3,
+    EMERGENCY_STOP = 4,
+    SWITCHING = 5,
+    ERROR = 6
+  };
 
-/** \brief A handle used to read and mode a single joint. */
-class JointModeHandle
-{
-public:
+  /** \brief A handle used to read and mode a single joint. */
+  class JointModeHandle
+  {
+  public:
 
-  /**
+    /**
    * \param mode Which mode to start in
    */
-  JointModeHandle(std::string name, JointCommandModes* mode)
-    : mode_(mode)
-    , name_(name)
-  {
-    if (!mode_)
+    JointModeHandle(std::string name, int* mode)
+      : mode_(mode)
+      , name_(name)
     {
-      throw HardwareInterfaceException("Cannot create mode interface. Mode data pointer is null.");
+      if (!mode_)
+      {
+        throw HardwareInterfaceException("Cannot create mode interface. Mode data pointer is null.");
+      }
     }
-  }
 
-  std::string getName() const {return name_;}
+    std::string getName() const {return name_;}
 
-  void setMode(JointCommandModes mode) {assert(mode_); *mode_ = mode;}
-  int getMode() const {assert(mode_); return *mode_;}
+    // void setMode(JointCommandModes mode) {assert(mode_); *mode_ = mode;}
+    int getMode() const {assert(mode_); return *mode_;}
 
-  // Helper function for console messages
-  std::string getModeName(JointCommandModes mode)
-  {
-    switch(mode)
+    // Helper function for console messages
+    std::string getModeName(JointCommandModes mode)
     {
+      switch(mode)
+      {
+      case BEGIN:
+        return "not_operational";
       case MODE_POSITION:
         return "position";
       case MODE_VELOCITY:
         return "velocity";
       case MODE_EFFORT:
         return "effort";
-      case MODE_OTHER:
+      case NOMODE:
         return "other";
+      case EMERGENCY_STOP:
+        return "emergency_stop";
+      case SWITCHING:
+        return "switching";
+      case ERROR:
+        return "error";
+      }
+      return "unknown";
     }
-    return "unknown";
-  }
 
-private:
-  JointCommandModes* mode_;
-  std::string name_;
-};
+  private:
+    int* mode_;
+    std::string name_;
+  };
 
-/** \brief Hardware interface to support changing between control modes
+  /** \brief Hardware interface to support changing between control modes
  *
  */
-class JointModeInterface : public HardwareResourceManager<JointModeHandle, ClaimResources> {};
+  class JointModeInterface : public HardwareResourceManager<JointModeHandle, ClaimResources> {};
 
 } // namespace
 
