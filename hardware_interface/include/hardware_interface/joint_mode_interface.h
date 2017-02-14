@@ -79,6 +79,7 @@ namespace hardware_interface
 
     // void setMode(JointCommandModes mode) {assert(mode_); *mode_ = mode;}
     int getMode() const {assert(mode_); return *mode_;}
+    const int* getModePtr() const {assert(mode_); return mode_;}
 
     // Helper function for console messages
     std::string getModeName(JointCommandModes mode)

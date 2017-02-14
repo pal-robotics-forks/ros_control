@@ -246,10 +246,12 @@ bool ControllerManager::loadController(const std::string& name)
     ROS_ERROR("Exception thrown while initializing controller %s.\n%s", name.c_str(), e.what());
     initialized = false;
   }
+/*
   catch(...){
     ROS_ERROR("Exception thrown while initializing controller %s", name.c_str());
     initialized = false;
   }
+*/
   if (!initialized)
   {
     to.clear();

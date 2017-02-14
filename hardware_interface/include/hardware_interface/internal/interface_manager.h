@@ -91,6 +91,14 @@ public:
     return iface;
   }
 
+  std::vector<std::string> getAvailableInterfaces(){
+    std::vector<std::string> res;
+    for(InterfaceMap::iterator it = interfaces_.begin(); it != interfaces_.end(); ++it){
+      res.push_back(it->first);
+    }
+    return res;
+  }
+
 protected:
   typedef std::map<std::string, void*> InterfaceMap;
   InterfaceMap interfaces_;
