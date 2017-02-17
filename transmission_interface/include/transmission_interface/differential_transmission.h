@@ -123,7 +123,8 @@ public:
    * \param joint_offset       Joint position offset used in the position mappings.
    * \pre Nonzero actuator and joint reduction values.
    */
-  DifferentialTransmission(const std::vector<double>& actuator_reduction,
+  DifferentialTransmission(const bool &ignore_transmission_for_absolute_encoders,
+                           const std::vector<double>& actuator_reduction,
                            const std::vector<double>& joint_reduction,
                            const std::vector<double>& joint_offset = std::vector<double>(2, 0.0));
 
@@ -211,15 +212,18 @@ protected:
   std::vector<double>  act_reduction_;
   std::vector<double>  jnt_reduction_;
   std::vector<double>  jnt_offset_;
+  bool ignore_transmission_for_absolute_encoders_;
 };
 
-inline DifferentialTransmission::DifferentialTransmission(const std::vector<double>& actuator_reduction,
+inline DifferentialTransmission::DifferentialTransmission(const bool &ignore_transmission_for_absolute_encoders,
+                                                          const std::vector<double>& actuator_reduction,
                                                           const std::vector<double>& joint_reduction,
                                                           const std::vector<double>& joint_offset)
   : Transmission(),
     act_reduction_(actuator_reduction),
     jnt_reduction_(joint_reduction),
-    jnt_offset_(joint_offset)
+    jnt_offset_(joint_offset),
+    ignore_transmission_for_absolute_encoders_(ignore_transmission_for_absolute_encoders)
 {
   if (numActuators() != act_reduction_.size() ||
       numJoints()    != jnt_reduction_.size() ||
@@ -286,8 +290,14 @@ inline void DifferentialTransmission::actuatorToJointAbsolutePosition(const Actu
   std::vector<double>& ar = act_reduction_;
   std::vector<double>& jr = jnt_reduction_;
 
-  *jnt_data.absolute_position[0] = (*act_data.absolute_position[0] / ar[0] + *act_data.absolute_position[1] / ar[1]) / (2.0 * jr[0]) + jnt_offset_[0];
-  *jnt_data.absolute_position[1] = (*act_data.absolute_position[0] / ar[0] - *act_data.absolute_position[1] / ar[1]) / (2.0 * jr[1]) + jnt_offset_[1];
+  if(!ignore_transmission_for_absolute_encoders_){
+    *jnt_data.absolute_position[0] = (*act_data.absolute_position[0] / ar[0] + *act_data.absolute_position[1] / ar[1]) / (2.0 * jr[0]) + jnt_offset_[0];
+    *jnt_data.absolute_position[1] = (*act_data.absolute_position[0] / ar[0] - *act_data.absolute_position[1] / ar[1]) / (2.0 * jr[1]) + jnt_offset_[1];
+  }
+  else{
+    *jnt_data.absolute_position[0] = *act_data.absolute_position[1];
+    *jnt_data.absolute_position[1] = *act_data.absolute_position[0];
+  }
 }
 
 inline void DifferentialTransmission::actuatorToJointTorqueSensor(const ActuatorData& act_data,

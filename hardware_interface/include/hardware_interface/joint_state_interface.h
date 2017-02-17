@@ -159,12 +159,29 @@ public:
     }
     return *absolute_pos_;
   }
+
+  const double* getAbsolutePositionPtr() const{
+    assert(hasAbsolutePosition());
+    if(!hasAbsolutePosition()){
+      throw std::runtime_error("Joint state handle does not contain torque sensor information");
+    }
+    return absolute_pos_;
+  }
+
   double getTorqueSensor() const {
     assert(torque_sensor_);
     if(!hasTorqueSensor()){
       throw std::runtime_error("Joint state handle does not contain torque sensor information");
     }
     return *torque_sensor_;
+  }
+
+  const double* getTorqueSensorPtr() const {
+    assert(torque_sensor_);
+    if(!hasTorqueSensor()){
+      throw std::runtime_error("Joint state handle does not contain torque sensor information");
+    }
+    return torque_sensor_;
   }
 
   bool hasAbsolutePosition() const {
