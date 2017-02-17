@@ -2,6 +2,11 @@
 Changelog for package controller_manager
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Added ptr accesors
+* Contributors: Hilario Tome
+
 0.2.4 (2016-11-09)
 ------------------
 * Fixed bug hasTorqueSensor and hasAbsoluteSensor, added std run_time exception support to controller manager

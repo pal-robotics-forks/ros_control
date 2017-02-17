@@ -2,6 +2,12 @@
 Changelog for package hardware_interface
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* added pointer getters for torque sensor and absoute position encoders
+* Added ptr accesors
+* Contributors: Hilario Tome
+
 0.2.4 (2016-11-09)
 ------------------
 * Added joint mode interface
