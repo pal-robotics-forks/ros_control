@@ -70,11 +70,13 @@ struct CheckIsResourceManager {
     for(typename std::vector<C*>::iterator it = managers.begin(); it != managers.end(); ++it)
       managers_in.push_back(static_cast<typename C::resource_manager_type*>(*it));
     C::concatManagers(managers_in, result);
+    yes tmp_yes;
+    return tmp_yes;
   }
 
   // method called if C is not a ResourceManager
   template <typename C>
-  static no& callCM(typename std::vector<C*>& managers, C* result, ...) {}
+  static no& callCM(typename std::vector<C*>& managers, C* result, ...) { no tmp_no; return tmp_no; }
 
   // calls ResourceManager::concatManagers if C is a ResourceManager
   static const void callConcatManagers(typename std::vector<T*>& managers, T* result)
@@ -90,7 +92,7 @@ struct CheckIsResourceManager {
 
   // method called if C is not a ResourceManager
   template <typename C>
-  static std::vector<std::string> callGR(T* iface, ...) {}
+  static std::vector<std::string> callGR(T* iface, ...) { return {}; }
 
   // calls ResourceManager::concatManagers if C is a ResourceManager
   static std::vector<std::string> callGetResources(T* iface)
