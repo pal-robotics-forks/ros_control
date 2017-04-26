@@ -32,7 +32,7 @@
 
 #include <ros/common.h>
 #include <urdf_model/joint.h>
-#include <urdf/urdfdom_compatibility.h>
+//#include <urdf/urdfdom_compatibility.h>
 #include <joint_limits_interface/joint_limits.h>
 
 namespace joint_limits_interface
