@@ -35,6 +35,32 @@
 //#include <urdf/urdfdom_compatibility.h>
 #include <joint_limits_interface/joint_limits.h>
 
+
+#define URDF_TYPEDEF_CLASS_POINTER(Class) \
+class Class; \
+typedef boost::shared_ptr<Class> Class##SharedPtr; \
+typedef boost::shared_ptr<const Class> Class##ConstSharedPtr; \
+typedef boost::weak_ptr<Class> Class##WeakPtr
+namespace urdf {
+URDF_TYPEDEF_CLASS_POINTER(Box);
+URDF_TYPEDEF_CLASS_POINTER(Collision);
+URDF_TYPEDEF_CLASS_POINTER(Cylinder);
+URDF_TYPEDEF_CLASS_POINTER(Geometry);
+URDF_TYPEDEF_CLASS_POINTER(Inertial);
+URDF_TYPEDEF_CLASS_POINTER(Joint);
+URDF_TYPEDEF_CLASS_POINTER(JointCalibration);
+URDF_TYPEDEF_CLASS_POINTER(JointDynamics);
+URDF_TYPEDEF_CLASS_POINTER(JointLimits);
+URDF_TYPEDEF_CLASS_POINTER(JointMimic);
+URDF_TYPEDEF_CLASS_POINTER(JointSafety);
+URDF_TYPEDEF_CLASS_POINTER(Link);
+URDF_TYPEDEF_CLASS_POINTER(Material);
+URDF_TYPEDEF_CLASS_POINTER(Mesh);
+URDF_TYPEDEF_CLASS_POINTER(Sphere);
+URDF_TYPEDEF_CLASS_POINTER(Visual);
+URDF_TYPEDEF_CLASS_POINTER(ModelInterface);
+}
+
 namespace joint_limits_interface
 {
 
