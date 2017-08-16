@@ -62,6 +62,9 @@ namespace hardware_interface
   {
   public:
 
+    JointModeHandle():
+      name_(), mode_(0){}
+
     /**
    * \param mode Which mode to start in
    */
