@@ -47,32 +47,32 @@ TEST(PreconditionsTest, ExceptionThrowing)
   vector<double> offset_good(2, 1.0);
 
   // Invalid instance creation: Transmission cannot have zero reduction
-  EXPECT_THROW(DifferentialTransmission(reduction_bad1, reduction_good), TransmissionInterfaceException);
-  EXPECT_THROW(DifferentialTransmission(reduction_bad2, reduction_good), TransmissionInterfaceException);
-  EXPECT_THROW(DifferentialTransmission(reduction_bad3, reduction_good), TransmissionInterfaceException);
+  EXPECT_THROW(DifferentialTransmission(false,  reduction_bad1, reduction_good), TransmissionInterfaceException);
+  EXPECT_THROW(DifferentialTransmission(false,  reduction_bad2, reduction_good), TransmissionInterfaceException);
+  EXPECT_THROW(DifferentialTransmission(false,  reduction_bad3, reduction_good), TransmissionInterfaceException);
 
-  EXPECT_THROW(DifferentialTransmission(reduction_good, reduction_bad1), TransmissionInterfaceException);
-  EXPECT_THROW(DifferentialTransmission(reduction_good, reduction_bad2), TransmissionInterfaceException);
-  EXPECT_THROW(DifferentialTransmission(reduction_good, reduction_bad3), TransmissionInterfaceException);
+  EXPECT_THROW(DifferentialTransmission(false,  reduction_good, reduction_bad1), TransmissionInterfaceException);
+  EXPECT_THROW(DifferentialTransmission(false,  reduction_good, reduction_bad2), TransmissionInterfaceException);
+  EXPECT_THROW(DifferentialTransmission(false,  reduction_good, reduction_bad3), TransmissionInterfaceException);
 
-  EXPECT_THROW(DifferentialTransmission(reduction_bad1, reduction_good, offset_good), TransmissionInterfaceException);
-  EXPECT_THROW(DifferentialTransmission(reduction_bad2, reduction_good, offset_good), TransmissionInterfaceException);
-  EXPECT_THROW(DifferentialTransmission(reduction_bad3, reduction_good, offset_good), TransmissionInterfaceException);
+  EXPECT_THROW(DifferentialTransmission(false,  reduction_bad1, reduction_good, offset_good), TransmissionInterfaceException);
+  EXPECT_THROW(DifferentialTransmission(false,  reduction_bad2, reduction_good, offset_good), TransmissionInterfaceException);
+  EXPECT_THROW(DifferentialTransmission(false,  reduction_bad3, reduction_good, offset_good), TransmissionInterfaceException);
 
-  EXPECT_THROW(DifferentialTransmission(reduction_good, reduction_bad1, offset_good), TransmissionInterfaceException);
-  EXPECT_THROW(DifferentialTransmission(reduction_good, reduction_bad2, offset_good), TransmissionInterfaceException);
-  EXPECT_THROW(DifferentialTransmission(reduction_good, reduction_bad3, offset_good), TransmissionInterfaceException);
+  EXPECT_THROW(DifferentialTransmission(false,  reduction_good, reduction_bad1, offset_good), TransmissionInterfaceException);
+  EXPECT_THROW(DifferentialTransmission(false,  reduction_good, reduction_bad2, offset_good), TransmissionInterfaceException);
+  EXPECT_THROW(DifferentialTransmission(false,  reduction_good, reduction_bad3, offset_good), TransmissionInterfaceException);
 
   // Invalid instance creation: Wrong parameter sizes
   vector<double> reduction_bad_size(1, 1.0);
   vector<double>& offset_bad_size = reduction_bad_size;
-  EXPECT_THROW(DifferentialTransmission(reduction_bad_size, reduction_good),              TransmissionInterfaceException);
-  EXPECT_THROW(DifferentialTransmission(reduction_good, reduction_bad_size),              TransmissionInterfaceException);
-  EXPECT_THROW(DifferentialTransmission(reduction_good, reduction_good, offset_bad_size), TransmissionInterfaceException);
+  EXPECT_THROW(DifferentialTransmission(false,  reduction_bad_size, reduction_good),              TransmissionInterfaceException);
+  EXPECT_THROW(DifferentialTransmission(false,  reduction_good, reduction_bad_size),              TransmissionInterfaceException);
+  EXPECT_THROW(DifferentialTransmission(false,  reduction_good, reduction_good, offset_bad_size), TransmissionInterfaceException);
 
   // Valid instance creation
-  EXPECT_NO_THROW(DifferentialTransmission(reduction_good, reduction_good));
-  EXPECT_NO_THROW(DifferentialTransmission(reduction_good, reduction_good, offset_good));
+  EXPECT_NO_THROW(DifferentialTransmission(false,  reduction_good, reduction_good));
+  EXPECT_NO_THROW(DifferentialTransmission(false,  reduction_good, reduction_good, offset_good));
 }
 
 #ifndef NDEBUG // NOTE: This test validates assertion triggering, hence only gets compiled in debug mode
@@ -114,7 +114,7 @@ TEST(PreconditionsTest, AssertionTriggering)
   JointData    j_bad_size;
 
   // Transmission instance
-  DifferentialTransmission trans(vector<double>(2, 1.0),
+  DifferentialTransmission trans(false, vector<double>(2, 1.0),
                                  vector<double>(2, 1.0));
 
   // Data with invalid pointers should trigger an assertion
@@ -183,7 +183,7 @@ TEST(PreconditionsTest, AccessorValidation)
   jnt_offset[0] =  1.0;
   jnt_offset[1] = -1.0;
 
-  DifferentialTransmission trans(act_reduction,
+  DifferentialTransmission trans(false, act_reduction,
                                  jnt_reduction,
                                  jnt_offset);
 
@@ -290,7 +290,7 @@ protected:
     {
       try
       {
-        DifferentialTransmission trans(randomVector(2, rand_gen),
+        DifferentialTransmission trans(false, randomVector(2, rand_gen),
                                        randomVector(2, rand_gen),
                                        randomVector(2, rand_gen));
         out.push_back(trans);
@@ -334,7 +334,7 @@ TEST_F(WhiteBoxTest, DontMoveJoints)
   vector<double> joint_reduction(2, 2.0);
   vector<double> joint_offset(2, 1.0);
 
-  DifferentialTransmission trans(actuator_reduction, joint_reduction, joint_offset);
+  DifferentialTransmission trans(false, actuator_reduction, joint_reduction, joint_offset);
 
   // Actuator input (used for effort, velocity and position)
   *a_vec[0] = 0.0;
@@ -385,7 +385,7 @@ TEST_F(WhiteBoxTest, MoveFirstJointOnly)
   vector<double> actuator_reduction(2, 10.0);
   vector<double> joint_reduction(2, 2.0);
 
-  DifferentialTransmission trans(actuator_reduction, joint_reduction);
+  DifferentialTransmission trans(false, actuator_reduction, joint_reduction);
 
   // Actuator input (used for effort, velocity and position)
   *a_vec[0] = 10.0;
@@ -436,7 +436,7 @@ TEST_F(WhiteBoxTest, MoveSecondJointOnly)
   vector<double> actuator_reduction(2, 10.0);
   vector<double> joint_reduction(2, 2.0);
 
-  DifferentialTransmission trans(actuator_reduction, joint_reduction);
+  DifferentialTransmission trans(false, actuator_reduction, joint_reduction);
 
   // Actuator input (used for effort, velocity and position)
   *a_vec[0] =  10.0;
@@ -499,7 +499,7 @@ TEST_F(WhiteBoxTest, MoveBothJoints)
   joint_offset[0] = -2.0;
   joint_offset[1] =  4.0;
 
-  DifferentialTransmission trans(actuator_reduction, joint_reduction, joint_offset);
+  DifferentialTransmission trans(false, actuator_reduction, joint_reduction, joint_offset);
 
   // Actuator input (used for effort, velocity and position)
   *a_vec[0] = 3.0;
