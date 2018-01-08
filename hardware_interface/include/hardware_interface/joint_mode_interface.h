@@ -117,7 +117,7 @@ namespace hardware_interface
   /** \brief Hardware interface to support changing between control modes
  *
  */
-  class JointModeInterface : public HardwareResourceManager<JointModeHandle, ClaimResources> {};
+  class JointModeInterface : public HardwareResourceManager<JointModeHandle, DontClaimResources> {};
 
 } // namespace
 
