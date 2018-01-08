@@ -2,8 +2,8 @@
 Changelog for package ros_control
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.2.6 (2018-01-08)
+------------------
 * deleted changelogs
 * Update changelog
 * 0.2.5

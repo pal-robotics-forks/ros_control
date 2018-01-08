@@ -2,8 +2,8 @@
 Changelog for package joint_limits_interface
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.2.6 (2018-01-08)
+------------------
 * deleted changelogs
 * Added urdfdom compatibility
 * removed compatibility urdf header from joint limits interface

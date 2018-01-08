@@ -2,8 +2,8 @@
 Changelog for package controller_manager_tests
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.2.6 (2018-01-08)
+------------------
 * deleted changelogs
 * fixed tests
 * fixed missing return types and broken merge

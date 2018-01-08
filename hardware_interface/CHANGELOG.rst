@@ -2,8 +2,8 @@
 Changelog for package hardware_interface
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.2.6 (2018-01-08)
+------------------
 * deleted changelogs
 * maded joint mode not claim resources
 * added joint mode empty constructor

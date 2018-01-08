@@ -2,8 +2,8 @@
 Changelog for package combined_robot_hw_tests
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.2.6 (2018-01-08)
+------------------
 * maded package xmls consistent
 * deleted changelogs
 * updated changelog
