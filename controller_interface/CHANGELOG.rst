@@ -78,8 +78,8 @@ Changelog for package controller_interface
 * Address -Wunused-parameter warnings
 * Contributors: Adolfo Rodriguez Tsouroukdissian, Bence Magyar, Hilario Tome, Miguel Prada, Sam Pfeiffer, Victor Lopez
 
-Forthcoming
------------
+0.2.7 (2018-10-25)
+------------------
 
 0.9.3 (2015-05-05)
 ------------------

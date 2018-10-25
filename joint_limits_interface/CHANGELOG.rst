@@ -69,8 +69,8 @@ Changelog for package joint_limits_interface
 * Update changelogs
 * Contributors: Adolfo Rodriguez Tsouroukdissian, Adrià Roig, Bence Magyar, Daniel Pinyol, Dave Coleman, Hilario Tome, Jochen Sprickerhof, Paul Mathieu, Sam Pfeiffer, Victor Lopez
 
-Forthcoming
------------
+0.2.7 (2018-10-25)
+------------------
 
 0.9.3 (2015-05-05)
 ------------------

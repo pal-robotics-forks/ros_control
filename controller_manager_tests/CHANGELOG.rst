@@ -66,8 +66,8 @@ Changelog for package controller_manager_tests
 * Address -Wunused-parameter warnings
 * Contributors: Adolfo Rodriguez Tsouroukdissian, Bence Magyar, Hilario Tome, Hilario Tomé, Sam Pfeiffer, Victor Lopez
 
-Forthcoming
------------
+0.2.7 (2018-10-25)
+------------------
 
 0.9.3 (2015-05-05)
 ------------------
