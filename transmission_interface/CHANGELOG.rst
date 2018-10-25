@@ -81,6 +81,9 @@ Changelog for package transmission_interface
 * Address -Wunused-parameter warnings
 * Contributors: Adolfo Rodriguez Tsouroukdissian, Bence Magyar, Hilario Tome, Hilario Tomé, Sam Pfeiffer, Victor Lopez
 
+Forthcoming
+-----------
+
 0.9.3 (2015-05-05)
 ------------------
 * Update changelogs

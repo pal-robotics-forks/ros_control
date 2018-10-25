@@ -58,6 +58,9 @@ Changelog for package controller_manager_msgs
   account above changes.
 * Contributors: Adolfo Rodriguez Tsouroukdissian, Bence Magyar, Hilario Tome, Sam Pfeiffer, Victor Lopez
 
+Forthcoming
+-----------
+
 0.9.3 (2015-05-05)
 ------------------
 * Update changelogs

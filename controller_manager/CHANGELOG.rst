@@ -89,6 +89,9 @@ Changelog for package controller_manager
 * Address -Wunused-parameter warnings
 * Contributors: Adolfo Rodriguez Tsouroukdissian, Bence Magyar, Dave Coleman, Dmitry Rozhkov, Enrique Fernández Perdomo, Hilario Tome, Mathias Lüdtke, Sam Pfeiffer, Victor Lopez
 
+Forthcoming
+-----------
+
 0.9.3 (2015-05-05)
 ------------------
 * Update changelogs

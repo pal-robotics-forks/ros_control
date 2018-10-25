@@ -63,6 +63,9 @@ Changelog for package rqt_controller_manager
   existing helpers on controller_mamager_msgs.utils Python module.
 * Contributors: Adolfo Rodriguez Tsouroukdissian, Bence Magyar, Hilario Tome, Sam Pfeiffer, Victor Lopez
 
+Forthcoming
+-----------
+
 0.9.3 (2015-05-05)
 ------------------
 * Update changelogs

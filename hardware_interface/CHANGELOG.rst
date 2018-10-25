@@ -99,6 +99,12 @@ Changelog for package hardware_interface
 * Address -Wunused-parameter warnings
 * Contributors: Adolfo Rodriguez Tsouroukdissian, Bence Magyar, Dave Coleman, Hilario Tome, Mathias Lüdtke, Paul Mathieu, Sam Pfeiffer, Toni Oliver, Victor Lopez
 
+Forthcoming
+-----------
+* Fix build error in clang
+  error: non-aggregate type 'std::vector' (aka 'vector >') cannot be initialized with an initializer list
+* Contributors: Victor Lopez
+
 0.9.3 (2015-05-05)
 ------------------
 * Update changelogs

@@ -36,6 +36,9 @@ Changelog for package combined_robot_hw
 * Add packages combined_robot_hw and combined_robot_hw_tests. combined_robot_hw allows to load different RobotHW as plugins and combines them into a single RobotHW. A single controller manager can then access resources from any robot.
 * Contributors: Bence Magyar, Hilario Tome, Martin Günther, Toni Oliver
 
+Forthcoming
+-----------
+
 0.9.3 (2015-05-05)
 ------------------
 
