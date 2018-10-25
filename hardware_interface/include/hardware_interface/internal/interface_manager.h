@@ -92,7 +92,7 @@ struct CheckIsResourceManager {
 
   // method called if C is not a ResourceManager
   template <typename C>
-  static std::vector<std::string> callGR(T* iface, ...) { return {}; }
+  static std::vector<std::string> callGR(T* iface, ...) { return std::vector<std::string>(); }
 
   // calls ResourceManager::concatManagers if C is a ResourceManager
   static std::vector<std::string> callGetResources(T* iface)
