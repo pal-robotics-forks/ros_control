@@ -38,9 +38,9 @@
 
 #define URDF_TYPEDEF_CLASS_POINTER(Class) \
 class Class; \
-typedef boost::shared_ptr<Class> Class##SharedPtr; \
-typedef boost::shared_ptr<const Class> Class##ConstSharedPtr; \
-typedef boost::weak_ptr<Class> Class##WeakPtr
+typedef std::shared_ptr<Class> Class##SharedPtr; \
+typedef std::shared_ptr<const Class> Class##ConstSharedPtr; \
+typedef std::weak_ptr<Class> Class##WeakPtr
 namespace urdf {
 URDF_TYPEDEF_CLASS_POINTER(Box);
 URDF_TYPEDEF_CLASS_POINTER(Collision);
