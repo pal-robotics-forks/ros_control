@@ -105,8 +105,8 @@ Changelog for package hardware_interface
   error: non-aggregate type 'std::vector' (aka 'vector >') cannot be initialized with an initializer list
 * Contributors: Victor Lopez
 
-Forthcoming
------------
+0.2.8 (2019-09-06)
+------------------
 * Merge branch 'melodic-devel' into 'erbium-devel'
   Melodic devel
   See merge request control/ros_control!6

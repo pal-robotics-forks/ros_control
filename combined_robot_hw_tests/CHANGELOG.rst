@@ -32,8 +32,8 @@ Changelog for package combined_robot_hw_tests
 0.2.7 (2018-10-25)
 ------------------
 
-Forthcoming
------------
+0.2.8 (2019-09-06)
+------------------
 * Merge branch 'melodic-devel' into 'erbium-devel'
   Melodic devel
   See merge request control/ros_control!6
