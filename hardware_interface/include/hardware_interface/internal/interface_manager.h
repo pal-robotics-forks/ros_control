@@ -164,9 +164,9 @@ public:
     }
 
     // look for interfaces registered in the registered hardware
-    for(InterfaceManagerVector::iterator it = interface_managers_.begin();
-        it != interface_managers_.end(); ++it) {
-      T* iface = (*it)->get<T>();
+    for(InterfaceManagerVector::iterator im_it = interface_managers_.begin();
+        im_it != interface_managers_.end(); ++im_it) {
+      T* iface = (*im_it)->get<T>();
       if (iface)
         iface_list.push_back(iface);
     }

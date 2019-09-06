@@ -32,15 +32,18 @@
 
 #include <ros/common.h>
 #include <urdf_model/joint.h>
-//#include <urdf/urdfdom_compatibility.h>
+#include <urdf/urdfdom_compatibility.h>
 #include <joint_limits_interface/joint_limits.h>
-
-
+#if URDFDOM_HEADERS_MAJOR_VERSION == 0 && URDFDOM_HEADERS_MINOR_VERSION <= 4
+// urdfdom_compatibility undefs it after using it, so we need to redefine it
 #define URDF_TYPEDEF_CLASS_POINTER(Class) \
 class Class; \
 typedef boost::shared_ptr<Class> Class##SharedPtr; \
 typedef boost::shared_ptr<const Class> Class##ConstSharedPtr; \
 typedef boost::weak_ptr<Class> Class##WeakPtr
+#endif
+
+
 namespace urdf {
 URDF_TYPEDEF_CLASS_POINTER(Box);
 URDF_TYPEDEF_CLASS_POINTER(Collision);
@@ -60,6 +63,9 @@ URDF_TYPEDEF_CLASS_POINTER(Sphere);
 URDF_TYPEDEF_CLASS_POINTER(Visual);
 URDF_TYPEDEF_CLASS_POINTER(ModelInterface);
 }
+#if URDFDOM_HEADERS_MAJOR_VERSION == 0 && URDFDOM_HEADERS_MINOR_VERSION <= 4
+#undef URDF_TYPEDEF_CLASS_POINTER
+#endif
 
 namespace joint_limits_interface
 {
