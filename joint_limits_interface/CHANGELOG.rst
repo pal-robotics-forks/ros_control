@@ -72,6 +72,15 @@ Changelog for package joint_limits_interface
 0.2.7 (2018-10-25)
 ------------------
 
+Forthcoming
+-----------
+* Merge branch 'melodic-devel' into 'erbium-devel'
+  Melodic devel
+  See merge request control/ros_control!6
+* Use urdfdom compatibility
+* changed smart ptr from boost to std
+* Contributors: Sai Kishor Kothakota, Victor Lopez
+
 0.9.3 (2015-05-05)
 ------------------
 * Update changelogs

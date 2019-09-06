@@ -39,6 +39,14 @@ Changelog for package combined_robot_hw
 0.2.7 (2018-10-25)
 ------------------
 
+Forthcoming
+-----------
+* Merge branch 'melodic-devel' into 'erbium-devel'
+  Melodic devel
+  See merge request control/ros_control!6
+* Fixing shadowed variables errors
+* Contributors: Jordan Palacios, Victor Lopez
+
 0.9.3 (2015-05-05)
 ------------------
 

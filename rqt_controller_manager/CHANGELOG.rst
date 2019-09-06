@@ -66,6 +66,9 @@ Changelog for package rqt_controller_manager
 0.2.7 (2018-10-25)
 ------------------
 
+Forthcoming
+-----------
+
 0.9.3 (2015-05-05)
 ------------------
 * Update changelogs
