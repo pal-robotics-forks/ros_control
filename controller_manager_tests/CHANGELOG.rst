@@ -77,8 +77,8 @@ Changelog for package controller_manager_tests
 * Fixing shadowed variables errors
 * Contributors: Jordan Palacios, Victor Lopez
 
-Forthcoming
------------
+0.2.9 (2019-11-06)
+------------------
 
 0.9.3 (2015-05-05)
 ------------------

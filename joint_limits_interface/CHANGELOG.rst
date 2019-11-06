@@ -81,8 +81,8 @@ Changelog for package joint_limits_interface
 * changed smart ptr from boost to std
 * Contributors: Sai Kishor Kothakota, Victor Lopez
 
-Forthcoming
------------
+0.2.9 (2019-11-06)
+------------------
 
 0.9.3 (2015-05-05)
 ------------------

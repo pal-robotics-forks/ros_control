@@ -92,8 +92,8 @@ Changelog for package transmission_interface
 * Fixing shadowed variables errors
 * Contributors: Jordan Palacios, Victor Lopez
 
-Forthcoming
------------
+0.2.9 (2019-11-06)
+------------------
 * remove manifest.xml, it was confusing rosdep
 * Contributors: Victor Lopez
 
