@@ -47,6 +47,9 @@ Changelog for package combined_robot_hw
 * Fixing shadowed variables errors
 * Contributors: Jordan Palacios, Victor Lopez
 
+Forthcoming
+-----------
+
 0.9.3 (2015-05-05)
 ------------------
 

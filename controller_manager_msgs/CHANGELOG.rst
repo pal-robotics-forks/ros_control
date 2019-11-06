@@ -64,6 +64,9 @@ Changelog for package controller_manager_msgs
 0.2.8 (2019-09-06)
 ------------------
 
+Forthcoming
+-----------
+
 0.9.3 (2015-05-05)
 ------------------
 * Update changelogs

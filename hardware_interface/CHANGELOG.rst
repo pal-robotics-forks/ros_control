@@ -113,6 +113,11 @@ Changelog for package hardware_interface
 * Fixing shadowed variables errors
 * Contributors: Jordan Palacios, Victor Lopez
 
+Forthcoming
+-----------
+* Fix shadowed variables
+* Contributors: Victor Lopez
+
 0.9.3 (2015-05-05)
 ------------------
 * Update changelogs
