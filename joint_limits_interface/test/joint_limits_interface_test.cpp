@@ -70,10 +70,10 @@ class JointLimitsTest
 {
 public:
   JointLimitsTest()
-    : pos(0.0), vel(0.0), eff(0.0), cmd(0.0),
+    : pos(0.0), vel(0.0), eff(0.0), cmd_(0.0),
       name("joint_name"),
       period(0.1),
-      cmd_handle(JointStateHandle(name, &pos, &vel, &eff), &cmd)
+      cmd_handle(JointStateHandle(name, &pos, &vel, &eff), &cmd_)
   {
     limits.has_position_limits = true;
     limits.min_position = -1.0;
@@ -92,7 +92,7 @@ public:
   }
 
 protected:
-  double pos, vel, eff, cmd;
+  double pos, vel, eff, cmd_;
   string name;
   ros::Duration period;
   JointHandle cmd_handle;
