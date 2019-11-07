@@ -50,6 +50,9 @@ Changelog for package combined_robot_hw
 0.2.9 (2019-11-06)
 ------------------
 
+Forthcoming
+-----------
+
 0.9.3 (2015-05-05)
 ------------------
 

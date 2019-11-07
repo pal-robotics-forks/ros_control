@@ -84,6 +84,11 @@ Changelog for package joint_limits_interface
 0.2.9 (2019-11-06)
 ------------------
 
+Forthcoming
+-----------
+* Fix shadowed variables
+* Contributors: Victor Lopez
+
 0.9.3 (2015-05-05)
 ------------------
 * Update changelogs

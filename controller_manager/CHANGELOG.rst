@@ -103,6 +103,9 @@ Changelog for package controller_manager
 0.2.9 (2019-11-06)
 ------------------
 
+Forthcoming
+-----------
+
 0.9.3 (2015-05-05)
 ------------------
 * Update changelogs
