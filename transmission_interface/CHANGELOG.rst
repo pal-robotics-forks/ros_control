@@ -97,8 +97,8 @@ Changelog for package transmission_interface
 * remove manifest.xml, it was confusing rosdep
 * Contributors: Victor Lopez
 
-Forthcoming
------------
+0.2.10 (2019-11-07)
+-------------------
 
 0.9.3 (2015-05-05)
 ------------------
