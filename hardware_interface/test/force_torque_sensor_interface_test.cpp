@@ -52,7 +52,8 @@ TEST(ForceTorqueSensorHandleTest, HandleConstruction)
   {
     double force[3]  = {1.0, 2.0, 3.0};
     double torque[3] = {-1.0, -2.0, -3.0};
-    ForceTorqueSensorHandle tmp("name_1", "frame_1", force, torque);
+    double temperature = 1.0;
+    ForceTorqueSensorHandle tmp("name_1", "frame_1", force, torque, &temperature);
   }
 }
 
@@ -62,10 +63,11 @@ public:
   ForceTorqueSensorInterfaceTest()
     : force1(), force2(),
       torque1(), torque2(),
+      temperature1(), temperature2(),
       name1("name_1"), name2("name_2"),
       frame_id1("frame_1"), frame_id2("frame_2"),
-      h1(name1, frame_id1, force1, torque1),
-      h2(name2, frame_id2, 0, torque2) // Torque-only sensor
+      h1(name1, frame_id1, force1, torque1, &temperature1),
+      h2(name2, frame_id2, 0, torque2, &temperature2) // Torque-only sensor
   {
     force1[0] = 1.0;
     force1[1] = 2.0;
@@ -82,11 +84,15 @@ public:
     torque2[0] = -force2[0];
     torque2[1] = -force2[1];
     torque2[2] = -force2[2];
+
+    temperature1 = 1.0;
+    temperature2 = 2.0;
   }
 
 protected:
   double force1[3], force2[3];
   double torque1[3], torque2[3];
+  double temperature1, temperature2;
   string name1, name2;
   string frame_id1, frame_id2;
   ForceTorqueSensorHandle h1;
@@ -114,6 +120,7 @@ TEST_F(ForceTorqueSensorInterfaceTest, ExcerciseApi)
   EXPECT_DOUBLE_EQ(torque1[0], h1_tmp.getTorque()[0]);
   EXPECT_DOUBLE_EQ(torque1[1], h1_tmp.getTorque()[1]);
   EXPECT_DOUBLE_EQ(torque1[2], h1_tmp.getTorque()[2]);
+  EXPECT_DOUBLE_EQ(temperature1, h1_tmp.getTemperature());
 
   ForceTorqueSensorHandle h2_tmp = iface.getHandle(name2);
   EXPECT_EQ(name2, h2_tmp.getName());
@@ -123,6 +130,7 @@ TEST_F(ForceTorqueSensorInterfaceTest, ExcerciseApi)
   EXPECT_DOUBLE_EQ(torque2[0], h2_tmp.getTorque()[0]);
   EXPECT_DOUBLE_EQ(torque2[1], h2_tmp.getTorque()[1]);
   EXPECT_DOUBLE_EQ(torque2[2], h2_tmp.getTorque()[2]);
+  EXPECT_DOUBLE_EQ(temperature2, h2_tmp.getTemperature());
 
   // This interface does not claim resources
   EXPECT_TRUE(iface.getClaims().empty());
