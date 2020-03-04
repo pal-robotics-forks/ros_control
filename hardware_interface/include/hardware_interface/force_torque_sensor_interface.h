@@ -31,6 +31,7 @@
 #define HARDWARE_INTERFACE_FORCE_CONTROL_SENSOR_INTERFACE_H
 
 #include <hardware_interface/internal/hardware_resource_manager.h>
+#include <limits>
 #include <string>
 
 namespace hardware_interface
@@ -62,11 +63,22 @@ public:
       temperature_(temperature)
   {}
 
+  ForceTorqueSensorHandle(const std::string& name,
+                          const std::string& frame_id,
+                          double* force,
+                          double* torque)
+    : name_(name),
+      frame_id_(frame_id),
+      force_(force),
+      torque_(torque),
+      temperature_(0)
+  {}
+
   std::string getName()     const {return name_;}
   std::string getFrameId()  const {return frame_id_;}
   const double* getForce()  const {return force_;}
   const double* getTorque() const {return torque_;}
-  const double getTemperature() const {return *temperature_;}
+  double getTemperature() const {return temperature_ ? *temperature_ : std::numeric_limits<double>::quiet_NaN();}
 
 private:
   std::string name_;

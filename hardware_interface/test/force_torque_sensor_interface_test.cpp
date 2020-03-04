@@ -63,11 +63,11 @@ public:
   ForceTorqueSensorInterfaceTest()
     : force1(), force2(),
       torque1(), torque2(),
-      temperature1(), temperature2(),
+      temperature1(),
       name1("name_1"), name2("name_2"),
       frame_id1("frame_1"), frame_id2("frame_2"),
       h1(name1, frame_id1, force1, torque1, &temperature1),
-      h2(name2, frame_id2, 0, torque2, &temperature2) // Torque-only sensor
+      h2(name2, frame_id2, 0, torque2) // Torque-only sensor, no temperature
   {
     force1[0] = 1.0;
     force1[1] = 2.0;
@@ -86,13 +86,12 @@ public:
     torque2[2] = -force2[2];
 
     temperature1 = 1.0;
-    temperature2 = 2.0;
   }
 
 protected:
   double force1[3], force2[3];
   double torque1[3], torque2[3];
-  double temperature1, temperature2;
+  double temperature1;
   string name1, name2;
   string frame_id1, frame_id2;
   ForceTorqueSensorHandle h1;
@@ -130,7 +129,7 @@ TEST_F(ForceTorqueSensorInterfaceTest, ExcerciseApi)
   EXPECT_DOUBLE_EQ(torque2[0], h2_tmp.getTorque()[0]);
   EXPECT_DOUBLE_EQ(torque2[1], h2_tmp.getTorque()[1]);
   EXPECT_DOUBLE_EQ(torque2[2], h2_tmp.getTorque()[2]);
-  EXPECT_DOUBLE_EQ(temperature2, h2_tmp.getTemperature());
+  EXPECT_TRUE(std::isnan(h2_tmp.getTemperature()));
 
   // This interface does not claim resources
   EXPECT_TRUE(iface.getClaims().empty());
