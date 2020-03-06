@@ -45,10 +45,12 @@ bool MyRobotHW4::init(ros::NodeHandle& root_nh, ros::NodeHandle &robot_hw_nh)
   torque_[0] = 0.0;
   torque_[1] = 0.1;
   torque_[2] = 0.2;
+  temperature_ = 0.0;
+
   sensor_name_ = "ft_sensor_1";
   frame_id_ = "link_1";
 
-  ft_sensor_interface_.registerHandle(ForceTorqueSensorHandle(sensor_name_, frame_id_, force_, torque_));
+  ft_sensor_interface_.registerHandle(ForceTorqueSensorHandle(sensor_name_, frame_id_, force_, torque_, &temperature_));
 
   registerInterface(&ft_sensor_interface_);
   registerInterface(&a_plain_hw_interface_);

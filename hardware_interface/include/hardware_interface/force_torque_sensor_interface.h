@@ -31,6 +31,7 @@
 #define HARDWARE_INTERFACE_FORCE_CONTROL_SENSOR_INTERFACE_H
 
 #include <hardware_interface/internal/hardware_resource_manager.h>
+#include <limits>
 #include <string>
 
 namespace hardware_interface
@@ -40,15 +41,28 @@ namespace hardware_interface
 class ForceTorqueSensorHandle
 {
 public:
-  ForceTorqueSensorHandle() : name_(""), frame_id_(""), force_(0), torque_(0) {}
+  ForceTorqueSensorHandle() : name_(""), frame_id_(""), force_(0), torque_(0), temperature_(0) {}
 
   /**
    * \param name The name of the sensor
    * \param frame_id The reference frame to which this sensor is associated
    * \param force A pointer to the storage of the force value: a triplet (x,y,z)
    * \param torque A pointer to the storage of the torque value: a triplet (x,y,z)
+   * \param temperature A pointer to the storage of this sensor's temperature
    *
    */
+  ForceTorqueSensorHandle(const std::string& name,
+                          const std::string& frame_id,
+                          double* force,
+                          double* torque,
+                          double* temperature)
+    : name_(name),
+      frame_id_(frame_id),
+      force_(force),
+      torque_(torque),
+      temperature_(temperature)
+  {}
+
   ForceTorqueSensorHandle(const std::string& name,
                           const std::string& frame_id,
                           double* force,
@@ -56,19 +70,22 @@ public:
     : name_(name),
       frame_id_(frame_id),
       force_(force),
-      torque_(torque)
+      torque_(torque),
+      temperature_(0)
   {}
 
   std::string getName()     const {return name_;}
   std::string getFrameId()  const {return frame_id_;}
   const double* getForce()  const {return force_;}
   const double* getTorque() const {return torque_;}
+  double getTemperature() const {return temperature_ ? *temperature_ : std::numeric_limits<double>::quiet_NaN();}
 
 private:
   std::string name_;
   std::string frame_id_;
   double* force_;
   double* torque_;
+  double* temperature_;
 };
 
 /** \brief Hardware interface to support reading the state of a force-torque sensor. */

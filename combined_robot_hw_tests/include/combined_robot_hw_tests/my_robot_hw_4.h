@@ -58,6 +58,7 @@ private:
 
   double force_[3];
   double torque_[3];
+  double temperature_;
   std::string sensor_name_;
   std::string frame_id_;
 };
