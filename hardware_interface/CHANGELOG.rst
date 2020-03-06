@@ -121,6 +121,15 @@ Changelog for package hardware_interface
 0.2.10 (2019-11-07)
 -------------------
 
+Forthcoming
+-----------
+* Merge branch 'ft_temperature' into 'erbium-devel'
+  Add FT sensor temperature report
+  See merge request control/ros_control!7
+* Added constructor with no temperature for backwards compatibility
+* Added FT sensor temperature report
+* Contributors: Jordan Palacios, jordanpalacios
+
 0.9.3 (2015-05-05)
 ------------------
 * Update changelogs
