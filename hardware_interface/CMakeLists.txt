@@ -7,7 +7,7 @@ include_directories(include)
 
 # Declare catkin package
 catkin_package(
-  CATKIN_DEPENDS roscpp
+  CATKIN_DEPENDS roscpp control_toolbox
   INCLUDE_DIRS include
   )
 
