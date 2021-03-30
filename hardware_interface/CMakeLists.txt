@@ -1,9 +1,10 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(hardware_interface)
 
-find_package(catkin REQUIRED COMPONENTS roscpp)
+find_package(catkin REQUIRED COMPONENTS roscpp control_toolbox)
 
 include_directories(include)
+include_directories(SYSTEM ${catkin_INCLUDE_DIRS})
 
 # Declare catkin package
 catkin_package(

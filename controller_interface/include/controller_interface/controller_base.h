@@ -151,9 +151,42 @@ public:
 
   /*\}*/
 
+  /**
+   * @brief setRobotHwPtr - Method to store the RobotHW pointer in the controller base
+   * class
+   * @param robot_hw - The robot hardware abstraction pointer
+   * @return True, if it is successful, else False
+   */
+  virtual bool setRobotHwPtr(hardware_interface::RobotHW* robot_hw)
+  {
+    if (robot_hw)
+    {
+      robot_hw_ = robot_hw;
+      return true;
+    }
+    return false;
+  }
   /// The current execution state of the controller
   enum {CONSTRUCTED, INITIALIZED, RUNNING} state_;
 
+protected:
+  // To store a copy of the RobotHw pointer
+  hardware_interface::RobotHW* robot_hw_;
+
+  template <class T>
+  /**
+   * @brief getHardwareInterface - Method to get the desired HardwareInterface pointer
+   * @return Returns the requested HardwareInterface pointer.
+   * @throws If the robot hardware pointer doesn't exist, it throws an exception
+   */
+  T* getHardwareInterface()
+  {
+    if (!robot_hw_)
+      throw std::runtime_error(
+          "RobotHW pointer is not set in the ControllerBase! "
+          "Set it using setRobotHwPtr method, before accessing the getHWInterface<T>() method");
+    return robot_hw_->get<T>();
+  }
 
 private:
   ControllerBase(const ControllerBase &c);

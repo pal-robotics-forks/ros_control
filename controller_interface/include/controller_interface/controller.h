@@ -100,6 +100,10 @@ protected:
                            ros::NodeHandle&             controller_nh,
                            ClaimedResources&            claimed_resources)
   {
+    if(!setRobotHwPtr(robot_hw)){
+      ROS_ERROR("Cannot initialize this controller because it failed to set the RobotHW pointer");
+      return false;
+    }
     // check if construction finished cleanly
     if (state_ != CONSTRUCTED){
       ROS_ERROR("Cannot initialize this controller because it failed to be constructed");

@@ -60,8 +60,6 @@ TEST(ActuatorStateHandleTest, AssertionTriggering)
   EXPECT_DEATH(h.getEffort(),     ".*");
   EXPECT_DEATH(h.getCommand(),    ".*");
   EXPECT_DEATH(h.setCommand(1.0), ".*");
-  EXPECT_DEATH(h.getPIDGains(),    ".*");
-  EXPECT_DEATH(h.setPIDGains(1000.0, 0.1, 10), ".*");
 }
 #endif // NDEBUG
 
