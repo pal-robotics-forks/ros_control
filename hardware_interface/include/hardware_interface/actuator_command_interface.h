@@ -32,6 +32,7 @@
 #include <string>
 #include <hardware_interface/internal/hardware_resource_manager.h>
 #include <hardware_interface/actuator_state_interface.h>
+#include <control_toolbox/pid.h>
 
 namespace hardware_interface
 {
@@ -47,12 +48,13 @@ public:
    * \param cmd A pointer to the storage for this actuator's output command
    */
   ActuatorHandle(const ActuatorStateHandle& as, double* cmd)
-    : ActuatorStateHandle(as), cmd_(cmd)
+    : ActuatorStateHandle(as), cmd_(cmd), ff_gain_(0.0)
   {
     if (!cmd_)
     {
       throw HardwareInterfaceException("Cannot create handle '" + as.getName() + "'. Command data pointer is null.");
     }
+    pid_gains_ = new control_toolbox::Pid::Gains();
   }
 
   void setCommand(double command) {assert(cmd_); *cmd_ = command;}
@@ -60,8 +62,56 @@ public:
 
   double* getCommandPtr() {return cmd_;}
 
+  // Methods for setting and getting the gains information
+
+  void setPIDGains(double p, double i, double d)
+  {
+    assert(pid_gains_);
+    pid_gains_->p_gain_ = p;
+    pid_gains_->i_gain_ = i;
+    pid_gains_->d_gain_ = d;
+  }
+
+  control_toolbox::Pid::Gains getPIDGains() const
+  {
+    assert(pid_gains_);
+    return *pid_gains_;
+  }
+
+  control_toolbox::Pid::Gains* getPIDGainsPtr()
+  {
+    return pid_gains_;
+  }
+
+  const control_toolbox::Pid::Gains* getPIDGainsConstPtr() const
+  {
+    return pid_gains_;
+  }
+
+  void setFFGain(double ff_gain)
+  {
+    ff_gain_ = ff_gain;
+  }
+
+  double getFFGain() const
+  {
+    return ff_gain_;
+  }
+
+  double* getFFGainPtr()
+  {
+    return &ff_gain_;
+  }
+
+  const double* getFFGainConstPtr() const
+  {
+    return &ff_gain_;
+  }
+
 private:
   double* cmd_;
+  control_toolbox::Pid::Gains* pid_gains_;
+  double ff_gain_;
 };
 
 /** \brief Hardware interface to support commanding an array of actuators.
