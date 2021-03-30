@@ -117,7 +117,6 @@ TEST_F(ActuatorCommandInterfaceTest, ExcerciseApi)
   EXPECT_DOUBLE_EQ(0.0, hc1_tmp.getFFGain());
   const double new_ff_gain = 10.0;
   hc1_tmp.setFFGain(new_ff_gain);
-  EXPECT_DOUBLE_EQ(new_ff_gain, *hc1_tmp.getFFGainPtr());
   EXPECT_DOUBLE_EQ(new_ff_gain, *hc1_tmp.getFFGainConstPtr());
 
   const control_toolbox::Pid::Gains* pid_gains = hc1_tmp.getPIDGainsConstPtr();
@@ -134,9 +133,6 @@ TEST_F(ActuatorCommandInterfaceTest, ExcerciseApi)
   EXPECT_DOUBLE_EQ(new_i_gain, pid_gains->i_gain_);
   EXPECT_DOUBLE_EQ(new_d_gain, pid_gains->d_gain_);
   // Test the same with other methods
-  EXPECT_DOUBLE_EQ(new_p_gain, hc1_tmp.getPIDGainsPtr()->p_gain_);
-  EXPECT_DOUBLE_EQ(new_i_gain, hc1_tmp.getPIDGainsPtr()->i_gain_);
-  EXPECT_DOUBLE_EQ(new_d_gain, hc1_tmp.getPIDGainsPtr()->d_gain_);
   EXPECT_DOUBLE_EQ(new_p_gain, hc1_tmp.getPIDGains().p_gain_);
   EXPECT_DOUBLE_EQ(new_i_gain, hc1_tmp.getPIDGains().i_gain_);
   EXPECT_DOUBLE_EQ(new_d_gain, hc1_tmp.getPIDGains().d_gain_);

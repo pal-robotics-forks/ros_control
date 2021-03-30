@@ -54,7 +54,7 @@ public:
     {
       throw HardwareInterfaceException("Cannot create handle '" + as.getName() + "'. Command data pointer is null.");
     }
-    pid_gains_ = new control_toolbox::Pid::Gains();
+    pid_gains_ = control_toolbox::Pid::Gains();
   }
 
   void setCommand(double command) {assert(cmd_); *cmd_ = command;}
@@ -66,26 +66,19 @@ public:
 
   void setPIDGains(double p, double i, double d)
   {
-    assert(pid_gains_);
-    pid_gains_->p_gain_ = p;
-    pid_gains_->i_gain_ = i;
-    pid_gains_->d_gain_ = d;
+    pid_gains_.p_gain_ = p;
+    pid_gains_.i_gain_ = i;
+    pid_gains_.d_gain_ = d;
   }
 
   control_toolbox::Pid::Gains getPIDGains() const
-  {
-    assert(pid_gains_);
-    return *pid_gains_;
-  }
-
-  control_toolbox::Pid::Gains* getPIDGainsPtr()
   {
     return pid_gains_;
   }
 
   const control_toolbox::Pid::Gains* getPIDGainsConstPtr() const
   {
-    return pid_gains_;
+    return &pid_gains_;
   }
 
   void setFFGain(double ff_gain)
@@ -98,11 +91,6 @@ public:
     return ff_gain_;
   }
 
-  double* getFFGainPtr()
-  {
-    return &ff_gain_;
-  }
-
   const double* getFFGainConstPtr() const
   {
     return &ff_gain_;
@@ -110,7 +98,7 @@ public:
 
 private:
   double* cmd_;
-  control_toolbox::Pid::Gains* pid_gains_;
+  control_toolbox::Pid::Gains pid_gains_;
   double ff_gain_;
 };
 
