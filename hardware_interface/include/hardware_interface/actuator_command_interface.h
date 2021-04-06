@@ -41,20 +41,24 @@ namespace hardware_interface
 class ActuatorHandle : public ActuatorStateHandle
 {
 public:
-  ActuatorHandle() : ActuatorStateHandle(), cmd_(0) {}
+  ActuatorHandle() : ActuatorStateHandle(), cmd_(0)
+  {
+    initializeGains();
+  }
 
   /**
    * \param as This actuator's state handle
    * \param cmd A pointer to the storage for this actuator's output command
    */
   ActuatorHandle(const ActuatorStateHandle& as, double* cmd)
-    : ActuatorStateHandle(as), cmd_(cmd), ff_gain_(0.0)
+    : ActuatorStateHandle(as), cmd_(cmd)
   {
     if (!cmd_)
     {
-      throw HardwareInterfaceException("Cannot create handle '" + as.getName() + "'. Command data pointer is null.");
+      throw HardwareInterfaceException("Cannot create handle '" + as.getName() +
+                                       "'. Command data pointer is null.");
     }
-    pid_gains_ = control_toolbox::Pid::Gains();
+    initializeGains();
   }
 
   void setCommand(double command) {assert(cmd_); *cmd_ = command;}
@@ -97,6 +101,14 @@ public:
   }
 
 private:
+  void initializeGains()
+  {
+    const double nan_value = std::numeric_limits<double>::quiet_NaN();
+    pid_gains_ =
+        control_toolbox::Pid::Gains(nan_value, nan_value, nan_value, nan_value, nan_value);
+    ff_gain_ = nan_value;
+  }
+
   double* cmd_;
   control_toolbox::Pid::Gains pid_gains_;
   double ff_gain_;
