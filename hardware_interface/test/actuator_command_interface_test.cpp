@@ -112,16 +112,16 @@ TEST_F(ActuatorCommandInterfaceTest, ExcerciseApi)
   EXPECT_DOUBLE_EQ(new_cmd_1, hc1_tmp.getCommand());
 
   // By default it is zero
-  EXPECT_DOUBLE_EQ(0.0, hc1_tmp.getFFGain());
+  EXPECT_TRUE(std::isnan(hc1_tmp.getFFGain()));
   const double new_ff_gain = 10.0;
   hc1_tmp.setFFGain(new_ff_gain);
   EXPECT_DOUBLE_EQ(new_ff_gain, *hc1_tmp.getFFGainConstPtr());
 
   const control_toolbox::Pid::Gains* pid_gains = hc1_tmp.getPIDGainsConstPtr();
   // Default values of the gains
-  EXPECT_DOUBLE_EQ(0.0, pid_gains->p_gain_);
-  EXPECT_DOUBLE_EQ(0.0, pid_gains->i_gain_);
-  EXPECT_DOUBLE_EQ(0.0, pid_gains->d_gain_);
+  EXPECT_TRUE(std::isnan(pid_gains->p_gain_));
+  EXPECT_TRUE(std::isnan(pid_gains->i_gain_));
+  EXPECT_TRUE(std::isnan(pid_gains->d_gain_));
   // Now change the values of the gains
   const double new_p_gain = 1000.0;
   const double new_i_gain = 1.0;
