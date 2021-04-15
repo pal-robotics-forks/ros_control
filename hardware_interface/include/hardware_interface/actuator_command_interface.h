@@ -70,6 +70,7 @@ public:
 
   void setPIDGains(double p, double i, double d)
   {
+    std::cout << "Setting PID Gains : " << p << " " << i << " " << d << std::endl;
     pid_gains_.p_gain_ = p;
     pid_gains_.i_gain_ = i;
     pid_gains_.d_gain_ = d;
@@ -85,17 +86,17 @@ public:
     return &pid_gains_;
   }
 
-  void setFFGain(double ff_gain)
+  void setFFTerm(double ff_gain)
   {
     ff_gain_ = ff_gain;
   }
 
-  double getFFGain() const
+  double getFFTerm() const
   {
     return ff_gain_;
   }
 
-  const double* getFFGainConstPtr() const
+  const double* getFFTermConstPtr() const
   {
     return &ff_gain_;
   }
