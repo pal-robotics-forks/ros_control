@@ -41,24 +41,31 @@ namespace hardware_interface
 class ActuatorHandle : public ActuatorStateHandle
 {
 public:
-  ActuatorHandle() : ActuatorStateHandle(), cmd_(0)
+  ActuatorHandle()
+    : ActuatorStateHandle(), cmd_(nullptr), pid_gains_cmd_(nullptr), ff_term_cmd_(nullptr)
   {
-    initializeGains();
   }
 
   /**
    * \param as This actuator's state handle
    * \param cmd A pointer to the storage for this actuator's output command
+   * \param pid_gains_cmd A pointer to the storage for this actuator's PIDs command
+   * \param ff_term_cmd A pointer to the storage for this actuator's FF term command
    */
-  ActuatorHandle(const ActuatorStateHandle& as, double* cmd)
-    : ActuatorStateHandle(as), cmd_(cmd)
+  ActuatorHandle(const ActuatorStateHandle& as, double* cmd,
+                 std::vector<double>* pid_gains_cmd = nullptr, double* ff_term_cmd = nullptr)
+    : ActuatorStateHandle(as), cmd_(cmd), pid_gains_cmd_(pid_gains_cmd), ff_term_cmd_(ff_term_cmd)
   {
     if (!cmd_)
     {
       throw HardwareInterfaceException("Cannot create handle '" + as.getName() +
                                        "'. Command data pointer is null.");
     }
-    initializeGains();
+    if(pid_gains_cmd_ && (*pid_gains_cmd_).size() != 3)
+    {
+      throw HardwareInterfaceException("Cannot create handle '" + as.getName() +
+                                       "'. The parsed PID gains command pointer is not of size 3.");
+    }
   }
 
   void setCommand(double command) {assert(cmd_); *cmd_ = command;}
@@ -70,49 +77,46 @@ public:
 
   void setPIDGains(double p, double i, double d)
   {
-    std::cout << "Setting PID Gains : " << p << " " << i << " " << d << std::endl;
-    pid_gains_.p_gain_ = p;
-    pid_gains_.i_gain_ = i;
-    pid_gains_.d_gain_ = d;
+    assert(pid_gains_cmd_);
+    (*pid_gains_cmd_)[0] = p;
+    (*pid_gains_cmd_)[1] = i;
+    (*pid_gains_cmd_)[2] = d;
   }
 
   control_toolbox::Pid::Gains getPIDGains() const
   {
-    return pid_gains_;
+    assert(pid_gains_cmd_);
+    const double nan_value = std::numeric_limits<double>::quiet_NaN();
+    return control_toolbox::Pid::Gains((*pid_gains_cmd_)[0], (*pid_gains_cmd_)[1],
+                                       (*pid_gains_cmd_)[2], nan_value, nan_value);
   }
 
-  const control_toolbox::Pid::Gains* getPIDGainsConstPtr() const
+  const std::vector<double>* getPIDGainsConstPtr() const
   {
-    return &pid_gains_;
+    return pid_gains_cmd_;
   }
 
   void setFFTerm(double ff_gain)
   {
-    ff_gain_ = ff_gain;
+    assert(ff_term_cmd_);
+    *ff_term_cmd_ = ff_gain;
   }
 
   double getFFTerm() const
   {
-    return ff_gain_;
+    assert(ff_term_cmd_);
+    return *ff_term_cmd_;
   }
 
   const double* getFFTermConstPtr() const
   {
-    return &ff_gain_;
+    return ff_term_cmd_;
   }
 
 private:
-  void initializeGains()
-  {
-    const double nan_value = std::numeric_limits<double>::quiet_NaN();
-    pid_gains_ =
-        control_toolbox::Pid::Gains(nan_value, nan_value, nan_value, nan_value, nan_value);
-    ff_gain_ = nan_value;
-  }
-
   double* cmd_;
-  control_toolbox::Pid::Gains pid_gains_;
-  double ff_gain_;
+  std::vector<double>* pid_gains_cmd_;
+  double* ff_term_cmd_;
 };
 
 /** \brief Hardware interface to support commanding an array of actuators.
