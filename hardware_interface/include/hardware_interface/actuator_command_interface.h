@@ -32,7 +32,6 @@
 #include <string>
 #include <hardware_interface/internal/hardware_resource_manager.h>
 #include <hardware_interface/actuator_state_interface.h>
-#include <control_toolbox/pid.h>
 
 namespace hardware_interface
 {
@@ -83,12 +82,16 @@ public:
     (*pid_gains_cmd_)[2] = d;
   }
 
-  control_toolbox::Pid::Gains getPIDGains() const
+  void getPIDGains(double& p_gain, double& i_gain, double& d_gain) const
   {
     assert(pid_gains_cmd_);
-    const double nan_value = std::numeric_limits<double>::quiet_NaN();
-    return control_toolbox::Pid::Gains((*pid_gains_cmd_)[0], (*pid_gains_cmd_)[1],
-                                       (*pid_gains_cmd_)[2], nan_value, nan_value);
+    if (!pid_gains_cmd_)
+    {
+      throw std::runtime_error("Actuator : " + getName() + "does not support PID gains");
+    }
+    p_gain = (*pid_gains_cmd_)[0];
+    i_gain = (*pid_gains_cmd_)[1];
+    d_gain = (*pid_gains_cmd_)[2];
   }
 
   const std::vector<double>* getPIDGainsConstPtr() const

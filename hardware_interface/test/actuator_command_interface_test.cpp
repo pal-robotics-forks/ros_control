@@ -63,6 +63,7 @@ TEST(ActuatorCommandHandleTest, HandleConstruction)
 TEST(ActuatorStateHandleTest, AssertionTriggering)
 {
   ActuatorHandle h;
+  double act_p_gain, act_i_gain, act_d_gain;
 
   // Data with invalid pointers should trigger an assertion
   EXPECT_DEATH(h.getPosition(),   ".*");
@@ -71,7 +72,7 @@ TEST(ActuatorStateHandleTest, AssertionTriggering)
   EXPECT_DEATH(h.getCommand(),    ".*");
   EXPECT_DEATH(h.setCommand(1.0), ".*");
   EXPECT_DEATH(h.setPIDGains(1.0, 0.001, 0.1), ".*");
-  EXPECT_DEATH(h.getPIDGains(), ".*");
+  EXPECT_DEATH(h.getPIDGains(act_p_gain, act_i_gain, act_d_gain), ".*");
   EXPECT_DEATH(h.setFFTerm(1.0), ".*");
   EXPECT_DEATH(h.getFFTerm(), ".*");
   EXPECT_FALSE(h.getFFTermConstPtr());
@@ -152,9 +153,11 @@ TEST_F(ActuatorCommandInterfaceTest, ExcerciseApi)
   EXPECT_DOUBLE_EQ(new_i_gain, (*pid_gains)[1]);
   EXPECT_DOUBLE_EQ(new_d_gain, (*pid_gains)[2]);
   // Test the same with other methods
-  EXPECT_DOUBLE_EQ(new_p_gain, hc1_tmp.getPIDGains().p_gain_);
-  EXPECT_DOUBLE_EQ(new_i_gain, hc1_tmp.getPIDGains().i_gain_);
-  EXPECT_DOUBLE_EQ(new_d_gain, hc1_tmp.getPIDGains().d_gain_);
+  double act_p_gain, act_i_gain, act_d_gain;
+  hc1_tmp.getPIDGains(act_p_gain, act_i_gain, act_d_gain);
+  EXPECT_DOUBLE_EQ(new_p_gain, act_p_gain);
+  EXPECT_DOUBLE_EQ(new_i_gain, act_i_gain);
+  EXPECT_DOUBLE_EQ(new_d_gain, act_d_gain);
 
   ActuatorHandle hc2_tmp = iface.getHandle(name2);
   EXPECT_EQ(name2, hc2_tmp.getName());
