@@ -71,12 +71,12 @@ TEST(ActuatorStateHandleTest, AssertionTriggering)
   EXPECT_DEATH(h.getEffort(),     ".*");
   EXPECT_DEATH(h.getCommand(),    ".*");
   EXPECT_DEATH(h.setCommand(1.0), ".*");
-  EXPECT_DEATH(h.setPIDGains(1.0, 0.001, 0.1), ".*");
-  EXPECT_DEATH(h.getPIDGains(act_p_gain, act_i_gain, act_d_gain), ".*");
-  EXPECT_DEATH(h.setFFTerm(1.0), ".*");
-  EXPECT_DEATH(h.getFFTerm(), ".*");
-  EXPECT_FALSE(h.getFFTermConstPtr());
-  EXPECT_FALSE(h.getPIDGainsConstPtr());
+  EXPECT_DEATH(h.setPIDGainsCmd(1.0, 0.001, 0.1), ".*");
+  EXPECT_DEATH(h.getPIDGainsCmd(act_p_gain, act_i_gain, act_d_gain), ".*");
+  EXPECT_DEATH(h.setFFTermCmd(1.0), ".*");
+  EXPECT_DEATH(h.getFFTermCmd(), ".*");
+  EXPECT_FALSE(h.getFFTermCmdConstPtr());
+  EXPECT_FALSE(h.getPIDGainsCmdConstPtr());
 }
 #endif // NDEBUG
 
@@ -133,12 +133,12 @@ TEST_F(ActuatorCommandInterfaceTest, ExcerciseApi)
   EXPECT_DOUBLE_EQ(new_cmd_1, hc1_tmp.getCommand());
 
   // By default it is zero
-  EXPECT_TRUE(std::isnan(hc1_tmp.getFFTerm()));
+  EXPECT_TRUE(std::isnan(hc1_tmp.getFFTermCmd()));
   const double new_ff_gain = 10.0;
-  hc1_tmp.setFFTerm(new_ff_gain);
-  EXPECT_DOUBLE_EQ(new_ff_gain, *hc1_tmp.getFFTermConstPtr());
+  hc1_tmp.setFFTermCmd(new_ff_gain);
+  EXPECT_DOUBLE_EQ(new_ff_gain, *hc1_tmp.getFFTermCmdConstPtr());
 
-  const std::vector<double>* pid_gains = hc1_tmp.getPIDGainsConstPtr();
+  const std::vector<double>* pid_gains = hc1_tmp.getPIDGainsCmdConstPtr();
   // Default values of the gains
   EXPECT_EQ(3, (*pid_gains).size());
   EXPECT_TRUE(std::isnan((*pid_gains)[0]));
@@ -148,13 +148,13 @@ TEST_F(ActuatorCommandInterfaceTest, ExcerciseApi)
   const double new_p_gain = 1000.0;
   const double new_i_gain = 1.0;
   const double new_d_gain = 10.0;
-  hc1_tmp.setPIDGains(new_p_gain, new_i_gain, new_d_gain);
+  hc1_tmp.setPIDGainsCmd(new_p_gain, new_i_gain, new_d_gain);
   EXPECT_DOUBLE_EQ(new_p_gain, (*pid_gains)[0]);
   EXPECT_DOUBLE_EQ(new_i_gain, (*pid_gains)[1]);
   EXPECT_DOUBLE_EQ(new_d_gain, (*pid_gains)[2]);
   // Test the same with other methods
   double act_p_gain, act_i_gain, act_d_gain;
-  hc1_tmp.getPIDGains(act_p_gain, act_i_gain, act_d_gain);
+  hc1_tmp.getPIDGainsCmd(act_p_gain, act_i_gain, act_d_gain);
   EXPECT_DOUBLE_EQ(new_p_gain, act_p_gain);
   EXPECT_DOUBLE_EQ(new_i_gain, act_i_gain);
   EXPECT_DOUBLE_EQ(new_d_gain, act_d_gain);

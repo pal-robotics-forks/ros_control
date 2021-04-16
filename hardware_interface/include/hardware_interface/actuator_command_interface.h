@@ -74,7 +74,7 @@ public:
 
   // Methods for setting and getting the gains information
 
-  void setPIDGains(double p, double i, double d)
+  void setPIDGainsCmd(double p, double i, double d)
   {
     assert(pid_gains_cmd_);
     (*pid_gains_cmd_)[0] = p;
@@ -82,7 +82,7 @@ public:
     (*pid_gains_cmd_)[2] = d;
   }
 
-  void getPIDGains(double& p_gain, double& i_gain, double& d_gain) const
+  void getPIDGainsCmd(double& p_gain, double& i_gain, double& d_gain) const
   {
     assert(pid_gains_cmd_);
     if (!pid_gains_cmd_)
@@ -94,24 +94,24 @@ public:
     d_gain = (*pid_gains_cmd_)[2];
   }
 
-  const std::vector<double>* getPIDGainsConstPtr() const
+  const std::vector<double>* getPIDGainsCmdConstPtr() const
   {
     return pid_gains_cmd_;
   }
 
-  void setFFTerm(double ff_gain)
+  void setFFTermCmd(double ff_gain)
   {
     assert(ff_term_cmd_);
     *ff_term_cmd_ = ff_gain;
   }
 
-  double getFFTerm() const
+  double getFFTermCmd() const
   {
     assert(ff_term_cmd_);
     return *ff_term_cmd_;
   }
 
-  const double* getFFTermConstPtr() const
+  const double* getFFTermCmdConstPtr() const
   {
     return ff_term_cmd_;
   }
