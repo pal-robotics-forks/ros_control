@@ -74,12 +74,12 @@ public:
 
   // Methods for setting and getting the gains information
 
-  void setPIDGainsCmd(double p, double i, double d)
+  void setPIDGainsCmd(double p_gain, double i_gain, double d_gain)
   {
     assert(pid_gains_cmd_);
-    (*pid_gains_cmd_)[0] = p;
-    (*pid_gains_cmd_)[1] = i;
-    (*pid_gains_cmd_)[2] = d;
+    (*pid_gains_cmd_)[0] = p_gain;
+    (*pid_gains_cmd_)[1] = i_gain;
+    (*pid_gains_cmd_)[2] = d_gain;
   }
 
   void getPIDGainsCmd(double& p_gain, double& i_gain, double& d_gain) const
