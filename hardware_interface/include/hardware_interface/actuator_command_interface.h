@@ -40,18 +40,30 @@ namespace hardware_interface
 class ActuatorHandle : public ActuatorStateHandle
 {
 public:
-  ActuatorHandle() : ActuatorStateHandle(), cmd_(0) {}
+  ActuatorHandle()
+    : ActuatorStateHandle(), cmd_(nullptr), pid_gains_cmd_(nullptr), ff_term_cmd_(nullptr)
+  {
+  }
 
   /**
    * \param as This actuator's state handle
    * \param cmd A pointer to the storage for this actuator's output command
+   * \param pid_gains_cmd A pointer to the storage for this actuator's PIDs command
+   * \param ff_term_cmd A pointer to the storage for this actuator's FF term command
    */
-  ActuatorHandle(const ActuatorStateHandle& as, double* cmd)
-    : ActuatorStateHandle(as), cmd_(cmd)
+  ActuatorHandle(const ActuatorStateHandle& as, double* cmd,
+                 std::vector<double>* pid_gains_cmd = nullptr, double* ff_term_cmd = nullptr)
+    : ActuatorStateHandle(as), cmd_(cmd), pid_gains_cmd_(pid_gains_cmd), ff_term_cmd_(ff_term_cmd)
   {
     if (!cmd_)
     {
-      throw HardwareInterfaceException("Cannot create handle '" + as.getName() + "'. Command data pointer is null.");
+      throw HardwareInterfaceException("Cannot create handle '" + as.getName() +
+                                       "'. Command data pointer is null.");
+    }
+    if(pid_gains_cmd_ && (*pid_gains_cmd_).size() != 3)
+    {
+      throw HardwareInterfaceException("Cannot create handle '" + as.getName() +
+                                       "'. The parsed PID gains command pointer is not of size 3.");
     }
   }
 
@@ -60,8 +72,54 @@ public:
 
   double* getCommandPtr() {return cmd_;}
 
+  // Methods for setting and getting the gains information
+
+  void setPIDGainsCmd(double p_gain, double i_gain, double d_gain)
+  {
+    assert(pid_gains_cmd_);
+    (*pid_gains_cmd_)[0] = p_gain;
+    (*pid_gains_cmd_)[1] = i_gain;
+    (*pid_gains_cmd_)[2] = d_gain;
+  }
+
+  void getPIDGainsCmd(double& p_gain, double& i_gain, double& d_gain) const
+  {
+    assert(pid_gains_cmd_);
+    if (!pid_gains_cmd_)
+    {
+      throw std::runtime_error("Actuator : " + getName() + "does not support PID gains");
+    }
+    p_gain = (*pid_gains_cmd_)[0];
+    i_gain = (*pid_gains_cmd_)[1];
+    d_gain = (*pid_gains_cmd_)[2];
+  }
+
+  const std::vector<double>* getPIDGainsCmdConstPtr() const
+  {
+    return pid_gains_cmd_;
+  }
+
+  void setFFTermCmd(double ff_gain)
+  {
+    assert(ff_term_cmd_);
+    *ff_term_cmd_ = ff_gain;
+  }
+
+  double getFFTermCmd() const
+  {
+    assert(ff_term_cmd_);
+    return *ff_term_cmd_;
+  }
+
+  const double* getFFTermCmdConstPtr() const
+  {
+    return ff_term_cmd_;
+  }
+
 private:
   double* cmd_;
+  std::vector<double>* pid_gains_cmd_;
+  double* ff_term_cmd_;
 };
 
 /** \brief Hardware interface to support commanding an array of actuators.

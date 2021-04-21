@@ -50,8 +50,19 @@ public:
    * \param eff A pointer to the storage for this actuator's effort (force or torque)
    */
 
-  ActuatorStateHandle(const std::string& name, const double* pos, const double* vel, const double* eff)
-    : name_(name), pos_(pos), vel_(vel), eff_(eff), absolute_pos_(0), torque_sensor_(0)
+  ActuatorStateHandle(const std::string& name, const double* pos, const double* vel,
+                      const double* eff, const double* absolute_pos = nullptr,
+                      const double* torque_sensor = nullptr,
+                      const std::vector<double>* pid_gains = nullptr,
+                      const double* ff_term = nullptr)
+    : name_(name)
+    , pos_(pos)
+    , vel_(vel)
+    , eff_(eff)
+    , absolute_pos_(absolute_pos)
+    , torque_sensor_(torque_sensor)
+    , pid_gains_(pid_gains)
+    , ff_term_(ff_term)
   {
     if (!pos)
     {
@@ -65,78 +76,10 @@ public:
     {
       throw HardwareInterfaceException("Cannot create handle '" + name + "'. Effort data pointer is null.");
     }
-
-  }
-
-  ActuatorStateHandle(const std::string& name, const double* pos, const double* vel, const double* eff,
-                      const double* absolute_pos)
-    : name_(name), pos_(pos), vel_(vel), eff_(eff), absolute_pos_(absolute_pos), torque_sensor_(0)
-  {
-    if (!pos)
+    if(pid_gains_ && (*pid_gains_).size() != 3)
     {
-      throw HardwareInterfaceException("Cannot create handle '" + name + "'. Position data pointer is null.");
-    }
-    if (!vel)
-    {
-      throw HardwareInterfaceException("Cannot create handle '" + name + "'. Velocity data pointer is null.");
-    }
-    if (!eff)
-    {
-      throw HardwareInterfaceException("Cannot create handle '" + name + "'. Effort data pointer is null.");
-    }
-    if (!absolute_pos)
-    {
-      throw HardwareInterfaceException("Cannot create handle '" + name + "'. Absolute data pointer is null.");
-    }
-
-  }
-
-  // Dummy bool parameter to differentiate from absolute encoder constructor
-  ActuatorStateHandle(const std::string& name, const double* pos, const double* vel, const double* eff,
-                      const double *torque_sensor, bool )
-    : name_(name), pos_(pos), vel_(vel), eff_(eff), absolute_pos_(0), torque_sensor_(torque_sensor)
-  {
-    if (!pos)
-    {
-      throw HardwareInterfaceException("Cannot create handle '" + name + "'. Position data pointer is null.");
-    }
-    if (!vel)
-    {
-      throw HardwareInterfaceException("Cannot create handle '" + name + "'. Velocity data pointer is null.");
-    }
-    if (!eff)
-    {
-      throw HardwareInterfaceException("Cannot create handle '" + name + "'. Effort data pointer is null.");
-    }
-    if(!torque_sensor){
-      throw HardwareInterfaceException("Cannot create handle '" + name + "'. Torque sensor data pointer is null.");
-    }
-
-  }
-
-  ActuatorStateHandle(const std::string& name, const double* pos, const double* vel, const double* eff,
-                      const double* absolute_pos, const double *torque_sensor)
-    : name_(name), pos_(pos), vel_(vel), eff_(eff), absolute_pos_(absolute_pos), torque_sensor_(torque_sensor)
-  {
-    if (!pos)
-    {
-      throw HardwareInterfaceException("Cannot create handle '" + name + "'. Position data pointer is null.");
-    }
-    if (!vel)
-    {
-      throw HardwareInterfaceException("Cannot create handle '" + name + "'. Velocity data pointer is null.");
-    }
-    if (!eff)
-    {
-      throw HardwareInterfaceException("Cannot create handle '" + name + "'. Effort data pointer is null.");
-    }
-
-    if (!absolute_pos)
-    {
-      throw HardwareInterfaceException("Cannot create handle '" + name + "'. Absolute data pointer is null.");
-    }
-    if(!torque_sensor){
-      throw HardwareInterfaceException("Cannot create handle '" + name + "'. Torque sensor data pointer is null.");
+      throw HardwareInterfaceException("Cannot create handle '" + name +
+                                       "'. The parsed PID gains pointer is not of size 3.");
     }
 
   }
@@ -145,6 +88,17 @@ public:
   double getPosition()  const {assert(pos_); return *pos_;}
   double getVelocity()  const {assert(vel_); return *vel_;}
   double getEffort()    const {assert(eff_); return *eff_;}
+  double getFFTerm()    const {assert(ff_term_); return *ff_term_;}
+  void getPIDGains(double& p_gain, double& i_gain, double& d_gain) const
+  {
+    assert(pid_gains_);
+    if(!pid_gains_){
+      throw std::runtime_error("Actuator does not support PID gains");
+    }
+    p_gain = (*pid_gains_)[0];
+    i_gain = (*pid_gains_)[1];
+    d_gain = (*pid_gains_)[2];
+  }
   double getAbsolutePosition() const {
     assert(absolute_pos_);
     if(!absolute_pos_){
@@ -163,6 +117,8 @@ public:
   const double* getPositionPtr() const {return pos_;}
   const double* getVelocityPtr() const {return vel_;}
   const double* getEffortPtr()   const {return eff_;}
+  const std::vector<double>* getPIDGainsPtr() const {return pid_gains_;}
+  const double* getFFTermPtr()   const {return ff_term_;}
   const double* getAbsolutePositionPtr() const {
     if(!absolute_pos_){
      throw std::runtime_error("Actuator does not support absolute encoders");
@@ -201,6 +157,8 @@ private:
   const double* eff_;
   const double* absolute_pos_;
   const double* torque_sensor_;
+  const std::vector<double>* pid_gains_;
+  const double* ff_term_;
 };
 
 /** \brief Hardware interface to support reading the state of an array of actuators

@@ -4,6 +4,7 @@ project(hardware_interface)
 find_package(catkin REQUIRED COMPONENTS roscpp)
 
 include_directories(include)
+include_directories(SYSTEM ${catkin_INCLUDE_DIRS})
 
 # Declare catkin package
 catkin_package(
