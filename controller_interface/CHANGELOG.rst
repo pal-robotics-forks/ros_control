@@ -93,6 +93,14 @@ Changelog for package controller_interface
 0.3.0 (2020-03-06)
 ------------------
 
+Forthcoming
+-----------
+* Merge branch 'actuator_pid_interfaces' into 'erbium-devel'
+  added the PID interfaces to the ActuatorHandle to expose to it's interfaces
+  See merge request control/ros_control!8
+* added methods to set the RobotHW and to retrieve the HardwareInterface pointer
+* Contributors: Jordan Palacios, Sai Kishor Kothakota
+
 0.9.3 (2015-05-05)
 ------------------
 * Update changelogs

@@ -54,6 +54,9 @@ Changelog for package combined_robot_hw_tests
 * Added FT sensor temperature report
 * Contributors: Jordan Palacios, jordanpalacios
 
+Forthcoming
+-----------
+
 0.9.3 (2015-05-05)
 ------------------
 

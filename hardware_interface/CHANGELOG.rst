@@ -130,6 +130,24 @@ Changelog for package hardware_interface
 * Added FT sensor temperature report
 * Contributors: Jordan Palacios, jordanpalacios
 
+Forthcoming
+-----------
+* Merge branch 'actuator_pid_interfaces' into 'erbium-devel'
+  added the PID interfaces to the ActuatorHandle to expose to it's interfaces
+  See merge request control/ros_control!8
+* refactor the ActuatorStateHandle to include the actual PIDs and FF term
+* rename methods to have Command naming
+* get gains by arguments rather than control_toolbox Gains struct
+* Update ActuatorCommandInterface to support PIDs and FF Term pointers
+* Fix FFTerm naming
+* Update tests to check for Nans when uninitialized
+* use nan as default value to the PID and FF gains
+* added methods to set the RobotHW and to retrieve the HardwareInterface pointer
+* remove getPtr methods and change pid_gains\_ to be a variable
+* added control_toolbox dependency
+* added the PID interfaces to the ActuatorHandle to expose to it's interfaces
+* Contributors: Jordan Palacios, Sai Kishor Kothakota
+
 0.9.3 (2015-05-05)
 ------------------
 * Update changelogs
