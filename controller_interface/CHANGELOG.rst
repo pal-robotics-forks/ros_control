@@ -95,6 +95,12 @@ Changelog for package controller_interface
 
 Forthcoming
 -----------
+* Merge branch 'fix_kinetic_compilation' into 'erbium-devel'
+  add c++11 compilation option
+  See merge request control/ros_control!9
+* add c++11 compilation option
+* Contributors: Jordan Palacios, Sai Kishor Kothakota
+
 * Merge branch 'actuator_pid_interfaces' into 'erbium-devel'
   added the PID interfaces to the ActuatorHandle to expose to it's interfaces
   See merge request control/ros_control!8

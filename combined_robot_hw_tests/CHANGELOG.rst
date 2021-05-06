@@ -56,6 +56,11 @@ Changelog for package combined_robot_hw_tests
 
 Forthcoming
 -----------
+* Merge branch 'fix_kinetic_compilation' into 'erbium-devel'
+  add c++11 compilation option
+  See merge request control/ros_control!9
+* add c++11 compilation option
+* Contributors: Jordan Palacios, Sai Kishor Kothakota
 
 0.9.3 (2015-05-05)
 ------------------
