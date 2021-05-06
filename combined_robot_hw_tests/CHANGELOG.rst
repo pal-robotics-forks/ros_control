@@ -54,8 +54,8 @@ Changelog for package combined_robot_hw_tests
 * Added FT sensor temperature report
 * Contributors: Jordan Palacios, jordanpalacios
 
-Forthcoming
------------
+0.4.1 (2021-05-06)
+------------------
 * Merge branch 'fix_kinetic_compilation' into 'erbium-devel'
   add c++11 compilation option
   See merge request control/ros_control!9

@@ -56,8 +56,8 @@ Changelog for package combined_robot_hw
 0.3.0 (2020-03-06)
 ------------------
 
-Forthcoming
------------
+0.4.1 (2021-05-06)
+------------------
 * Merge branch 'fix_kinetic_compilation' into 'erbium-devel'
   add c++11 compilation option
   See merge request control/ros_control!9
